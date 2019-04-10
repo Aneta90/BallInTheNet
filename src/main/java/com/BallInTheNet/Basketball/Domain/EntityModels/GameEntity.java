@@ -5,9 +5,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-
-@Entity
     @Table(name = "Games")
+    @Entity
     public class GameEntity implements Serializable {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
