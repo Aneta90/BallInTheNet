@@ -1,12 +1,5 @@
 package com.BallInTheNet.Basketball.Models;
 
-
-import lombok.AccessLevel;
-import lombok.Setter;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
-import javax.persistence.*;
 import java.util.List;
 
 
