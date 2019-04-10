@@ -3,6 +3,8 @@ package com.BallInTheNet.Basketball.Controllers;
 import com.BallInTheNet.Basketball.Models.Game;
 import com.BallInTheNet.Basketball.Service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -35,33 +37,27 @@ public class GameController {
 
     @GetMapping("/gameByDate")
     public List<Game> findFutureGames(){
-    //    return gameService.findFutureGames;
-        return null;
+        return gameService.findByFutureGames();
     }
 
     @PostMapping("/addNewGame")
-    public Long addNewPlayer(@RequestBody Game game){
-        return null; //to do
+    public Long addNewGame(@RequestBody Game game){
+        return gameService.addGame(game);
     }
 
     @DeleteMapping("/removeGame/{id}")
     public boolean remove(@PathVariable Long id) {
-        return false; // to do
+        return gameService.removeGame(id);
     }
 
     @PutMapping("/editGame/{id}")
-    public boolean edit(@RequestBody Game game,@PathVariable Long id) {
+    public boolean editGame(@RequestBody Game game, @PathVariable Long id) {
 
-        try {
-       //   return gameService.(course); to do
-        } catch (Exception ex) {
-            return false;
+            try {
+                return gameService.editGame(id,game);
+            } catch (Exception ex) {
+                return false;
+            }
         }
-        return false;
     }
 
-
-
-
-
-}

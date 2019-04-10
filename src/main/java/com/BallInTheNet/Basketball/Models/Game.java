@@ -68,15 +68,13 @@ public class Game {
         return isTeamHomeWin;
     }
 
-    public void setTeamHomeWine(Boolean teamHomeWin) {
+    public void setTeamHomeWin(Boolean teamHomeWin) {
         isTeamHomeWin = teamHomeWin;
     }
-
-    public Boolean getTeamAwayWine() {
+    public Boolean getTeamAwayWin() {
         return isTeamAwayWin;
     }
-
-    public void setTeamAwayWine(Boolean teamAwayWin) {
+    public void setTeamAwayWin(Boolean teamAwayWin) {
         isTeamAwayWin = teamAwayWin;
     }
 
