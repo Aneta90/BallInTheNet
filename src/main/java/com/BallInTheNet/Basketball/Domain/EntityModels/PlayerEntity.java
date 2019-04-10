@@ -1,27 +1,61 @@
-package com.BallInTheNet.Basketball.Models;
+package com.BallInTheNet.Basketball.Domain.EntityModels;
 
 
-public class Player {
+import javax.persistence.*;
+import java.io.Serializable;
 
+@Table(name = "player")
+@Entity
+
+public class PlayerEntity implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "playerId")
+    private Long playerId;
+
+    @Column(name = "firstName")
     private String firstName;
-    private String surName;
-    private Integer age;
-    private Integer experience;
-    private Boolean isInjured;
-    private Integer rating;
-    private Team team;
 
-    public Player() {
+    @Column(name = "surName")
+    private String surName;
+
+    @Column(name = "age")
+    private Integer age;
+
+    @Column(name = "experience")
+    // default value = 0; ??
+    private Integer experience;
+
+    @Column(name = "isInjured")
+    private Boolean isInjured;
+
+    @Column(name = "rating")
+    private Integer rating;
+
+    @ManyToOne
+    @JoinColumn(name = "teamId")
+    private TeamEntity teamEntity;
+
+    public PlayerEntity() {
     }
 
-    public Player(String firstName, String surName, Integer age, Integer experience,
-                  Boolean isInjured, Team team) {
+    public PlayerEntity(String firstName, String surName, Integer age, Integer experience,
+                        Boolean isInjured, TeamEntity teamEntity) {
         this.firstName = firstName;
         this.surName = surName;
         this.age = age;
         this.experience = experience;
         this.isInjured = isInjured;
-        this.team = team;
+        this.teamEntity = teamEntity;
+    }
+
+    public Long getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(Long playerId) {
+        this.playerId = playerId;
     }
 
     public String getFirstName() {
@@ -64,12 +98,12 @@ public class Player {
         isInjured = injured;
     }
 
-    public Team getTeam() {
-        return team;
+    public TeamEntity getTeamEntity() {
+        return teamEntity;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setTeamEntity(TeamEntity teamEntity) {
+        this.teamEntity = teamEntity;
     }
 
     public int getRating() {
