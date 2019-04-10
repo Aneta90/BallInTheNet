@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class mappingService {
+public class MappingService {
     //game mapping
     public GameEntity map(Game game) {
         GameEntity gameEntity = new GameEntity();
