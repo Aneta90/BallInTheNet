@@ -60,11 +60,17 @@ public class GameService {
     }
 
     public List<Game> findByHomeTeam(String teamHome){
-        return repositoryGame.findByTeamHome(teamHome).stream().map(this::map).collect(Collectors.toList());
+        List<Game> gameList = new ArrayList<>();
+        repositoryGame.findByTeamHome(teamHome).forEach(element-> gameList.add(mappingService.map(element)));
+        return gameList;
+        //return repositoryGame.findByTeamHome(teamHome).stream().map(this::map).collect(Collectors.toList());
     }
 
     public List<Game> findByHomeAway(String teamAway){
-        return repositoryGame.findByTeamAway(teamAway).stream().map(this::map).collect(Collectors.toList());
+        List<Game> gameList = new ArrayList<>();
+        repositoryGame.findByTeamAway(teamAway).forEach(element-> gameList.add(mappingService.map(element)));
+        return gameList;
+        //return repositoryGame.findByTeamAway(teamAway).stream().map(this::map).collect(Collectors.toList());
     }
 
     public List<Game> findByFutureGames(){

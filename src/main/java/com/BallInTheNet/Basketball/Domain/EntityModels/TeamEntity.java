@@ -21,11 +21,11 @@ public class TeamEntity implements Serializable {
     private String name;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "teamEntity", cascade = CascadeType.ALL)
     private List<PlayerEntity> playerEntityList;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany( mappedBy = "team")
+    @ManyToMany( mappedBy = "teamEntity")
     private List<GameEntity> gameEntity;
 
     @Setter(AccessLevel.NONE)
