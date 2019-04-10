@@ -21,8 +21,8 @@ public class MappingService {
         gameEntity.setTeamEntity(getListOfTeam(game));
         gameEntity.setTeamHomeScore(game.getTeamHomeScore());
         gameEntity.setTeamAwayScore(game.getTeamAwayScore());
-        gameEntity.setTeamHomeWine(game.getTeamHomeWin());
-        gameEntity.setTeamAwayWine(game.getTeamAwayWine());
+        gameEntity.setTeamHomeWin(game.getTeamHomeWin());
+        gameEntity.setTeamAwayWin(game.getTeamAwayWin());
         gameEntity.setDate(game.getDate());
         return gameEntity;
     }
@@ -34,8 +34,8 @@ public class MappingService {
         game.setTeam(getListOfTeam(gameEntity));
         game.setTeamHomeScore(gameEntity.getTeamHomeScore());
         game.setTeamAwayScore(gameEntity.getTeamAwayScore());
-        game.setTeamHomeWine(gameEntity.getTeamHomeWin());
-        game.setTeamAwayWine(gameEntity.getTeamAwayWine());
+        game.setTeamHomeWin(gameEntity.getTeamHomeWin());
+        game.setTeamAwayWin(gameEntity.getTeamAwayWin());
         game.setDate(gameEntity.getDate());
         return game;
     }
