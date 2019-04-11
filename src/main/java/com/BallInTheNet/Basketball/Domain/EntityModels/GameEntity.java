@@ -5,30 +5,34 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-    @Table(name = "Games")
-    @Entity
-    public class GameEntity implements Serializable {
+   // @Table(name = "Games")
+   @Entity
+   public class GameEntity implements Serializable {
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @GeneratedValue(strategy = GenerationType.AUTO)
         private Long gameId;
 
         private String teamHome;
 
         private String teamAway;
 
-        @ManyToMany
+        @ManyToMany(fetch = FetchType.LAZY,
+                cascade = {
+                        CascadeType.PERSIST,
+                        CascadeType.MERGE
+                })
         private List<TeamEntity> teamEntity;
 
-        @Column(name = "teamHomeScore", nullable = false)
+        @Column(name = "teamHomeScore"/*, nullable = false*/)
         private Integer teamHomeScore;
 
-        @Column(name = "teamAwayScore", nullable = false)
+        @Column(name = "teamAwayScore"/*, nullable = false*/)
         private Integer teamAwayScore;
 
-        @Column(name = "isTeamHomeWin", nullable = false)
+        @Column(name = "isTeamHomeWin"/*, nullable = false*/)
         private Boolean isTeamHomeWin;
 
-        @Column(name = "isTeamAwayWin", nullable = false)
+        @Column(name = "isTeamAwayWin"/*, nullable = false*/)
         private Boolean isTeamAwayWin;
 
         @Column
@@ -48,6 +52,7 @@ import java.util.List;
             this.teamEntity = teamEntity;
             this.date = date;
         }
+
 
         public Long getGameId() {
             return gameId;
@@ -121,15 +126,18 @@ import java.util.List;
             this.date = date;
         }
 
-        @Override
-        public String toString() {
-            return "GameEntity{" +
-                    "teamHome='" + teamHome + '\'' +
-                    ", teamAway='" + teamAway + '\'' +
-                    ", teamHomeScore=" + teamHomeScore +
-                    ", teamAwayScore=" + teamAwayScore +
-                    ", isTeamHomeWin=" + isTeamHomeWin +
-                    ", isTeamAwayWin=" + isTeamAwayWin +
-                    '}';
-        }
-}
+       @Override
+       public String toString() {
+           return "GameEntity{" +
+                   "gameId=" + gameId +
+                   ", teamHome='" + teamHome + '\'' +
+                   ", teamAway='" + teamAway + '\'' +
+                   ", teamEntity=" + teamEntity +
+                   ", teamHomeScore=" + teamHomeScore +
+                   ", teamAwayScore=" + teamAwayScore +
+                   ", isTeamHomeWin=" + isTeamHomeWin +
+                   ", isTeamAwayWin=" + isTeamAwayWin +
+                   ", date=" + date +
+                   '}';
+       }
+   }

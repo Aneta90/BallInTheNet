@@ -25,7 +25,11 @@ public class TeamEntity implements Serializable {
     private List<PlayerEntity> playerEntityList;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany( mappedBy = "teamEntity")
+    @ManyToMany( mappedBy = "teamEntity",fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
     private List<GameEntity> gameEntity;
 
     @Setter(AccessLevel.NONE)

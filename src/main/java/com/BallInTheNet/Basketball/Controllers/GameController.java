@@ -51,13 +51,14 @@ public class GameController {
     }
 
     @PutMapping("/editGame/{id}")
-    public boolean editGame(@RequestBody Game game, @PathVariable Long id) {
+    public ResponseEntity editGame(@RequestBody Game game, @PathVariable Long id) {
+        game = gameService.editGame(id, game);
 
-            try {
-                return gameService.editGame(id,game);
-            } catch (Exception ex) {
-                return false;
-            }
+        if (game == null) {
+            return ResponseEntity.badRequest().body("Zły request");
+        } else {
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(game);
         }
+    }
     }
 

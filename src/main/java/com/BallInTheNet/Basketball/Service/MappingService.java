@@ -14,11 +14,17 @@ import java.util.List;
 @Service
 public class MappingService {
     //game mapping
+
+
     public GameEntity map(Game game) {
+
+        TeamEntity team = new TeamEntity();
+        team.setName("Wawa");
+
         GameEntity gameEntity = new GameEntity();
         gameEntity.setTeamHome(game.getTeamHome());
         gameEntity.setTeamAway(game.getTeamAway());
-        gameEntity.setTeamEntity(getListOfTeam(game));
+        gameEntity.getTeamEntity().add(team);
         gameEntity.setTeamHomeScore(game.getTeamHomeScore());
         gameEntity.setTeamAwayScore(game.getTeamAwayScore());
         gameEntity.setTeamHomeWin(game.getTeamHomeWin());
@@ -28,10 +34,14 @@ public class MappingService {
     }
 
     public Game map(GameEntity gameEntity) {
+
+        Team team = new Team();
+        team.setName("Cracovia");
+
         Game game = new Game();
         game.setTeamHome(gameEntity.getTeamHome());
         game.setTeamAway(gameEntity.getTeamAway());
-        game.setTeam(getListOfTeam(gameEntity));
+        game.getTeam().add(team);
         game.setTeamHomeScore(gameEntity.getTeamHomeScore());
         game.setTeamAwayScore(gameEntity.getTeamAwayScore());
         game.setTeamHomeWin(gameEntity.getTeamHomeWin());

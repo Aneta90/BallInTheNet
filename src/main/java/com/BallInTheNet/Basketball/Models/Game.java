@@ -74,6 +74,7 @@ public class Game {
     public Boolean getTeamAwayWin() {
         return isTeamAwayWin;
     }
+
     public void setTeamAwayWin(Boolean teamAwayWin) {
         isTeamAwayWin = teamAwayWin;
     }
@@ -96,13 +97,15 @@ public class Game {
 
     @Override
     public String toString() {
-        return "GameEntity{" +
+        return "Game{" +
                 "teamHome='" + teamHome + '\'' +
                 ", teamAway='" + teamAway + '\'' +
+                ", team=" + team +
                 ", teamHomeScore=" + teamHomeScore +
                 ", teamAwayScore=" + teamAwayScore +
                 ", isTeamHomeWin=" + isTeamHomeWin +
                 ", isTeamAwayWin=" + isTeamAwayWin +
+                ", date=" + date +
                 '}';
     }
 }

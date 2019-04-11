@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface RepositoryGame extends JpaRepository<GameEntity,Long> {
+
     List<GameEntity> findByTeamHome(String teamHome);
     List<GameEntity> findByTeamAway(String teamAway);
     @Query("Select g from GameEntity g where g.date > CURRENT_DATE")
