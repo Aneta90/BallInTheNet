@@ -1,17 +1,12 @@
 package com.BallInTheNet.Basketball.Service;
 
 import com.BallInTheNet.Basketball.Domain.EntityModels.GameEntity;
-import com.BallInTheNet.Basketball.Domain.EntityModels.TeamEntity;
 import com.BallInTheNet.Basketball.Domain.Repository.RepositoryGame;
 import com.BallInTheNet.Basketball.Models.Game;
-import com.BallInTheNet.Basketball.Models.Team;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class GameService {
@@ -23,7 +18,7 @@ public class GameService {
         this.repositoryGame = repositoryGame;
     }
 
-    public GameEntity map(Game game) {
+    private GameEntity map(Game game) {
 
         GameEntity gameEntity = new GameEntity();
         gameEntity.setTeamHome(game.getTeamHome());
@@ -38,7 +33,7 @@ public class GameService {
         return gameEntity;
     }
 
-    public Game map(GameEntity gameEntity) {
+    private Game map(GameEntity gameEntity) {
         return new Game(gameEntity.getTeamHome(), gameEntity.getTeamAway(), gameEntity.getTeamHomeScore(), gameEntity.getTeamAwayScore(), gameEntity.getTeamHomeWin(), gameEntity.getTeamAwayWin(),null, gameEntity.getDate());
 //brakuje listy ustawiona na NULL na razie
     }
@@ -72,22 +67,6 @@ public class GameService {
         }
         return null;
     }
- /*   public boolean editGame(Long id, Game game) {
-
-        if (repositoryGame.existsById(id) || game != null) {
-            GameEntity newEntity=repositoryGame.findById(id).get();
-            newEntity.setTeamHome(game.getTeamHome());
-            newEntity.setTeamAway(game.getTeamAway());
-            newEntity.setTeamHomeScore(game.getTeamHomeScore());
-            newEntity.setTeamAwayScore(game.getTeamAwayScore());
-            newEntity.setTeamHomeWin(game.getTeamHomeWin());
-            newEntity.setTeamAwayWin(game.getTeamAwayWin());
-            newEntity.setDate(game.getDate());
-            return true;
-        }else {
-            throw new IllegalArgumentException("Wrong argument");
-        }
-    }*/
 
     public List<Game> getGames() {
         List<Game> gameList = new ArrayList<>();

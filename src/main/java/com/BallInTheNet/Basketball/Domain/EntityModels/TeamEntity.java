@@ -32,7 +32,7 @@ public class TeamEntity implements Serializable {
             })
     private List<GameEntity> gameEntity;
 
-    @Setter(AccessLevel.NONE)
+    //@Setter(AccessLevel.NONE)
     private Long totalScore;
 
     public TeamEntity() {
