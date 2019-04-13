@@ -1,26 +1,28 @@
 package com.BallInTheNet.Basketball.Domain.EntityModels;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-   // @Table(name = "Games")
+   @Table(name = "Games")
    @Entity
    public class GameEntity implements Serializable {
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         private Long gameId;
 
-        private String teamHome;
+        private String teamHome; //id
 
         private String teamAway;
 
-        @ManyToMany(fetch = FetchType.LAZY,
-                cascade = {
-                        CascadeType.PERSIST,
-                        CascadeType.MERGE
-                })
+        @ManyToMany(cascade = CascadeType.ALL)
+        @JsonBackReference
+        @JoinTable(name = "games_teams",
+                joinColumns = @JoinColumn(name = "gameId", referencedColumnName = "gameId"),
+                inverseJoinColumns = @JoinColumn(name = "teamId", referencedColumnName = "teamId"))
         private List<TeamEntity> teamEntity;
 
         @Column(name = "teamHomeScore"/*, nullable = false*/)

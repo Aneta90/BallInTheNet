@@ -15,7 +15,6 @@ import java.util.List;
 public class MappingService {
     //game mapping
 
-
     public GameEntity map(Game game) {
 
         TeamEntity team = new TeamEntity();
@@ -95,7 +94,6 @@ public class MappingService {
         player.setTeam(map(playerEntity.getTeamEntity()));
         return player;
     }
-
 
     //support method
     private List<GameEntity> getListOfGame(Team team) {

@@ -26,7 +26,7 @@ public class PlayerService {
     }
 
 
-    public List<Player> getListOfPlayer() {
+     public List<Player> getListOfPlayer() {
         List<PlayerEntity> playerEntityList = repositoryPlayer.findAll();
         List<Player> playerList = new ArrayList<>();
         for (PlayerEntity playerEntity : playerEntityList) {
@@ -35,13 +35,17 @@ public class PlayerService {
         return playerList;
     }
 
-    public List<Player> fineAllPlayersInTeam(Team team) {
+   public List<Player> findAllPlayersInTeam(Team team) { //do zostawienia -- metoda Sebka
         List<PlayerEntity> playerEntityList = repositoryPlayer.findAllByTeamEntity(mappingService.map(team));
         List<Player> playerList = new ArrayList<>();
         for (PlayerEntity playerEntity : playerEntityList) {
             playerList.add(mappingService.map(playerEntity));
         }
         return playerList;
+    }
+
+   public List<PlayerEntity> findAllPlayersEntitiesInTeam(Team team) { //??do usunięcia??
+       return repositoryPlayer.findAllByTeamEntity(mappingService.map(team));
     }
 
     public Boolean savePlayer(PlayerEntity playerEntity) {

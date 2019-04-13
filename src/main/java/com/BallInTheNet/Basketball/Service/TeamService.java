@@ -1,7 +1,5 @@
 package com.BallInTheNet.Basketball.Service;
-
 import com.BallInTheNet.Basketball.Domain.EntityModels.TeamEntity;
-import com.BallInTheNet.Basketball.Domain.Repository.RepositoryMySQL;
 import com.BallInTheNet.Basketball.Domain.Repository.RepositoryTeam;
 import com.BallInTheNet.Basketball.Models.Team;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +16,17 @@ public class TeamService {
 
     private final GameService gameService; //??
 
+    private final PlayerService playerService;//?
+
     private final RepositoryTeam repositoryTeam;
 
+
     @Autowired
-    public TeamService(RepositoryTeam repositoryTeam, RepositoryMySQL repositoryMySQL,GameService gameService) {
+    public TeamService(RepositoryTeam repositoryTeam, RepositoryMySQL repositoryMySQL,GameService gameService,PlayerService playerService) {
         this.repositoryTeam= repositoryTeam;
         this.repositoryMySQL=repositoryMySQL; //??
         this.gameService=gameService; //??
+        this.playerService=playerService;//??
     }
 
     private TeamEntity map(Team team) {
@@ -58,13 +60,17 @@ public class TeamService {
         return teamList;
     }
 
+    public Team findByNameEquals(String teamName){
+        TeamEntity teamEntity;
+        teamEntity= repositoryTeam.findByNameEquals(teamName);
+        return map(teamEntity);
+    }
+
     public List<Team> findByTotalScore(Long totalScore){
         List<Team> teamList = new ArrayList<>();
         repositoryTeam.findByTotalScore(totalScore).forEach(element-> teamList.add(map(element)));
         return teamList;
     }
-
-
 
 
     public Long addTeam(Team team){
@@ -93,9 +99,4 @@ public class TeamService {
         }
         return null;
     }
-
-
-
-
-
 }

@@ -1,8 +1,10 @@
 package com.BallInTheNet.Basketball.Service;
 
 import com.BallInTheNet.Basketball.Domain.EntityModels.GameEntity;
+import com.BallInTheNet.Basketball.Domain.EntityModels.TeamEntity;
 import com.BallInTheNet.Basketball.Domain.Repository.RepositoryGame;
 import com.BallInTheNet.Basketball.Models.Game;
+import com.BallInTheNet.Basketball.Models.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +20,7 @@ public class GameService {
         this.repositoryGame = repositoryGame;
     }
 
-    private GameEntity map(Game game) {
+    public GameEntity map(Game game) {
 
         GameEntity gameEntity = new GameEntity();
         gameEntity.setTeamHome(game.getTeamHome());
@@ -33,7 +35,7 @@ public class GameService {
         return gameEntity;
     }
 
-    private Game map(GameEntity gameEntity) {
+    public Game map(GameEntity gameEntity) {
         return new Game(gameEntity.getTeamHome(), gameEntity.getTeamAway(), gameEntity.getTeamHomeScore(), gameEntity.getTeamAwayScore(), gameEntity.getTeamHomeWin(), gameEntity.getTeamAwayWin(),null, gameEntity.getDate());
 //brakuje listy ustawiona na NULL na razie
     }
@@ -86,6 +88,12 @@ public class GameService {
         repositoryGame.findByTeamAway(teamAway).forEach(element-> gameList.add(map(element)));
         return gameList;
         //return repositoryGame.findByTeamAway(teamAway).stream().map(this::map).collect(Collectors.toList());
+    }
+
+    public Game findGameById(Long game_id){
+        GameEntity gameEntity;
+        gameEntity= repositoryGame.findGameByGameId(game_id);
+        return map(gameEntity);
     }
 
     public List<Game> findByFutureGames(){

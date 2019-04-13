@@ -13,4 +13,5 @@ public interface RepositoryPlayer extends JpaRepository<PlayerEntity,Long> {
     List<PlayerEntity> findAllByTeamEntity(TeamEntity teamEntity);
 
     List <PlayerEntity> findAllBySurName (String surname);
+
 }

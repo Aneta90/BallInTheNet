@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-@Table(name = "team")
+@Table(name = "Teams")
 @Entity
 public class TeamEntity implements Serializable {
 
@@ -20,16 +20,15 @@ public class TeamEntity implements Serializable {
 
     private String name;
 
-    @LazyCollection(LazyCollectionOption.FALSE)
+    //@LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "teamEntity", cascade = CascadeType.ALL)
     private List<PlayerEntity> playerEntityList;
 
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany( mappedBy = "teamEntity",fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
+    //@LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany//(mappedBy = "teamEntity")
+    @JoinTable(name = "games_teams",
+            joinColumns = @JoinColumn(name = "teamId", referencedColumnName = "teamId"),
+            inverseJoinColumns = @JoinColumn(name = "gameId", referencedColumnName = "gameId"))
     private List<GameEntity> gameEntity;
 
     //@Setter(AccessLevel.NONE)
@@ -96,3 +95,22 @@ public class TeamEntity implements Serializable {
                 '}';
     }
 }
+
+/*
+  {
+        "teamHome": "War",
+        "teamAway": "Rze",
+        "team": [{
+        "name":"War",
+        "totalScore":10
+    }, {
+        "name":"War",
+        "totalScore":20
+    }],
+        "teamHomeScore": 1,
+        "teamAwayScore": 2,
+        "date": "2019-04-11",
+        "teamHomeWin": null,
+        "teamAwayWin": null
+    }
+ */

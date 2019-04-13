@@ -4,7 +4,7 @@ package com.BallInTheNet.Basketball.Domain.EntityModels;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Table(name = "player")
+@Table(name = "Players")
 @Entity
 
 public class PlayerEntity implements Serializable {

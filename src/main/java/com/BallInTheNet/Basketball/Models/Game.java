@@ -4,7 +4,6 @@ package com.BallInTheNet.Basketball.Models;
 import java.time.LocalDate;
 import java.util.List;
 
-
 public class Game {
 
     private String teamHome;
@@ -109,3 +108,14 @@ public class Game {
                 '}';
     }
 }
+
+/*{
+        "teamHome": "War",
+        "teamAway": "Rze",
+        "team": null,
+        "teamHomeScore": 1,
+        "teamAwayScore": 2,
+        "date": "2019-04-11",
+        "teamHomeWin": null,
+        "teamAwayWin": null
+    } */

@@ -1,12 +1,16 @@
 package com.BallInTheNet.Basketball.Controllers;
 
+import com.BallInTheNet.Basketball.Domain.EntityModels.TeamEntity;
+import com.BallInTheNet.Basketball.Models.Game;
 import com.BallInTheNet.Basketball.Models.Team;
+import com.BallInTheNet.Basketball.Service.GameService;
 import com.BallInTheNet.Basketball.Service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -35,6 +39,10 @@ public class TeamController {
         return teamService.findByTotalScore(totalScore);
     }
 
+    @GetMapping("/teamByNameEquals/{teamName}")
+    public Team findByNameEquals(@PathVariable String teamName){
+        return teamService.findByNameEquals(teamName);
+    }
 
     @PostMapping("/addNewTeam")
     public Long addNewTeam(@RequestBody Team team){
@@ -55,4 +63,16 @@ public class TeamController {
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(team);
         }
     }
+
+    @GetMapping("/{name}/game") //nie dziala
+    public ResponseEntity<Collection<Game>> getGameTeam(@PathVariable String name) { //accesing game from a given team
+        Team team = teamService.findByNameEquals(name);
+
+        if (team != null) {
+            return new ResponseEntity<>(team.getGame(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
