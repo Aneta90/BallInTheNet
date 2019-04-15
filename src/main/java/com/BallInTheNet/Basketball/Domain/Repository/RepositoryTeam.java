@@ -17,4 +17,5 @@ public interface RepositoryTeam extends JpaRepository<TeamEntity, Long> {
     @Query("Select t from TeamEntity t where t.totalScore >= ?1")
     List<TeamEntity> findByTotalScore(Long totalScore);
 
+
 }
