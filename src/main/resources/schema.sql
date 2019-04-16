@@ -1,4 +1,4 @@
-CREATE TABLE players (
+/*CREATE TABLE players (
     playerId INTEGER NOT NULL auto_increment,
     firstName VARCHAR(20),
     surName VARCHAR(20),
@@ -29,7 +29,7 @@ CREATE TABLE games (
     teamAwayScore INTEGER,
     isTeamHomeWin BOOLEAN,
     isTeamAwayWin BOOLEAN,
-    date TIMESTAMP,
+    date DATE,
     CONSTRAINT PK_Games PRIMARY KEY (gameId),
     FOREIGN KEY (teamHomeId) REFERENCES teams(teamId),
     FOREIGN KEY (teamAwayId) REFERENCES teams(teamId)
@@ -41,3 +41,4 @@ CREATE TABLE games_teams (
     teamAwayId INTEGER NOT NULL REFERENCES teams (teamId),
     PRIMARY KEY (gameId)
 );
+*/
