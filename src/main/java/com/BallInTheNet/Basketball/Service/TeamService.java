@@ -1,4 +1,5 @@
 package com.BallInTheNet.Basketball.Service;
+
 import com.BallInTheNet.Basketball.Domain.EntityModels.TeamEntity;
 import com.BallInTheNet.Basketball.Domain.Repository.RepositoryTeam;
 import com.BallInTheNet.Basketball.Models.Team;
@@ -12,25 +13,21 @@ import java.util.List;
 public class TeamService {
 
 
-    private final GameService gameService; //??
-
-    private final PlayerService playerService;//?
 
     private final RepositoryTeam repositoryTeam;
 
 
     @Autowired
-    public TeamService(RepositoryTeam repositoryTeam, GameService gameService,PlayerService playerService) {
-        this.repositoryTeam= repositoryTeam;
-        this.gameService=gameService; //??
-        this.playerService=playerService;//??
+    public TeamService(RepositoryTeam repositoryTeam) {
+        this.repositoryTeam = repositoryTeam;
     }
 
     private TeamEntity map(Team team) {
 
         TeamEntity teamEntity = new TeamEntity();
         teamEntity.setName(team.getName());
-        teamEntity.setPlayerEntityList(null); //TO DO mapowanie listy
+        teamEntity.setGameEntity(null); //TO DO mapowanie listy
+        teamEntity.setPlayerEntityList(null); //TO DO mapowanie losty
         teamEntity.setTotalScore(team.getTotalScore());
         return teamEntity;
     }
@@ -38,6 +35,7 @@ public class TeamService {
     private Team map(TeamEntity teamEntity) {
         Team team = new Team();
         team.setName(teamEntity.getName());
+        team.setGame(null); //TO DO mapowanie listy
         team.setPlayerList(null); //TO DO mapowanie listy
         team.setTotalScore(teamEntity.getTotalScore());
         return team;
@@ -45,30 +43,30 @@ public class TeamService {
 
     public List<Team> getTeams() {
         List<Team> teamList = new ArrayList<>();
-        repositoryTeam.findAll().forEach(element-> teamList.add(map(element)));
+        repositoryTeam.findAll().forEach(element -> teamList.add(map(element)));
         return teamList;
     }
 
-    public List<Team> findByName(String teamName){
+    public List<Team> findByName(String teamName) {
         List<Team> teamList = new ArrayList<>();
-        repositoryTeam.findByName(teamName).forEach(element-> teamList.add(map(element)));
+        repositoryTeam.findByName(teamName).forEach(element -> teamList.add(map(element)));
         return teamList;
     }
 
-    public Team findByNameEquals(String teamName){
+    public Team findByNameEquals(String teamName) {
         TeamEntity teamEntity;
-        teamEntity= repositoryTeam.findByNameEquals(teamName);
+        teamEntity = repositoryTeam.findByNameEquals(teamName);
         return map(teamEntity);
     }
 
-    public List<Team> findByTotalScore(Long totalScore){
+    public List<Team> findByTotalScore(Long totalScore) {
         List<Team> teamList = new ArrayList<>();
-        repositoryTeam.findByTotalScore(totalScore).forEach(element-> teamList.add(map(element)));
+        repositoryTeam.findByTotalScore(totalScore).forEach(element -> teamList.add(map(element)));
         return teamList;
     }
 
 
-    public Long addTeam(Team team){
+    public Long addTeam(Team team) {
         return repositoryTeam.save(map(team)).getTeamId();
     }
 
@@ -84,8 +82,9 @@ public class TeamService {
     public Team editTeam(Long id, Team team) {
 
         if (repositoryTeam.existsById(id)) {
-            TeamEntity newEntity=repositoryTeam.findById(id).get();
+            TeamEntity newEntity = repositoryTeam.findById(id).get();
             newEntity.setName(team.getName());
+            newEntity.setGameEntity(null); // TO DO mapowanie listy
             newEntity.setPlayerEntityList(null);//TO DO mapowanie listy
             newEntity.setTotalScore(team.getTotalScore());
             repositoryTeam.save(newEntity);

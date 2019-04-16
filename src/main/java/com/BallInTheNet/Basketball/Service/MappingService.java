@@ -15,7 +15,7 @@ import java.util.List;
 public class MappingService {
     //game mapping
 
-    public GameEntity map(Game game) {
+    GameEntity map(Game game) {
 
         TeamEntity team = new TeamEntity();
         team.setName("Wawa");
@@ -32,7 +32,7 @@ public class MappingService {
         return gameEntity;
     }
 
-    public Game map(GameEntity gameEntity) {
+    Game map(GameEntity gameEntity) {
 
         Game game = new Game();
         game.setTeamHomeId(gameEntity.getTeamHomeId());
@@ -48,7 +48,7 @@ public class MappingService {
     }
 
     //team mapping
-    public TeamEntity map(Team team) {
+    TeamEntity map(Team team) {
 
         TeamEntity teamEntity = new TeamEntity();
         teamEntity.setName(team.getName());
@@ -57,7 +57,7 @@ public class MappingService {
         return teamEntity;
     }
 
-    public Team map(TeamEntity teamEntity) {
+    Team map(TeamEntity teamEntity) {
         Team team = new Team();
         team.setName(teamEntity.getName());
         team.setPlayerList(null);
@@ -66,7 +66,7 @@ public class MappingService {
     }
 
     //players mapping
-    public PlayerEntity map(Player player) {
+    PlayerEntity map(Player player) {
         PlayerEntity playerEntity = new PlayerEntity();
         playerEntity.setFirstName(player.getFirstName());
         playerEntity.setSurName(player.getSurName());
@@ -78,7 +78,7 @@ public class MappingService {
         return playerEntity;
     }
 
-    public Player map(PlayerEntity playerEntity) {
+    Player map(PlayerEntity playerEntity) {
         Player player = new Player();
         player.setFirstName(playerEntity.getFirstName());
         player.setSurName(playerEntity.getSurName());
@@ -93,7 +93,7 @@ public class MappingService {
 }
 /*
     //support method
-    private List<GameEntity> getListOfGame(Team team) {
+    List<GameEntity> getListOfGame(Team team) {
         List<GameEntity> listOfGameEntity = new ArrayList<>();
         for (int i = 0; i < team().size(); i++) {
             listOfGameEntity.add(map(team.getGame().get(i)));
@@ -101,7 +101,7 @@ public class MappingService {
         return listOfGameEntity;
     }
 
-    private List<Game> getListOfGame(TeamEntity teamEntity) {
+    List<Game> getListOfGame(TeamEntity teamEntity) {
         List<Game> listOfGame = new ArrayList<>();
         for (int i = 0; i < teamEntity.getGameEntity().size(); i++) {
             listOfGame.add(map(teamEntity.getGameEntity().get(i)));
@@ -109,7 +109,7 @@ public class MappingService {
         return listOfGame;
     }
 
-    private List<Player> getListOfPlayers(TeamEntity teamEntity) {
+    List<Player> getListOfPlayers(TeamEntity teamEntity) {
         List<Player> playerList = new ArrayList<>();
         for (int i = 0; i < teamEntity.getPlayerEntityList().size(); i++) {
             playerList.add(map(teamEntity.getPlayerEntityList().get(i)));
@@ -117,7 +117,7 @@ public class MappingService {
         return playerList;
     }
 
-    private List<PlayerEntity> getListOfPlayers(Team team) {
+    List<PlayerEntity> getListOfPlayers(Team team) {
         List<PlayerEntity> playerEntityList = new ArrayList<>();
         for (int i = 0; i < team.getPlayerList().size(); i++) {
             playerEntityList.add(map(team.getPlayerList().get(i)));
@@ -125,7 +125,7 @@ public class MappingService {
         return playerEntityList;
     }
 
-    private List<TeamEntity> getListOfTeam(Game game) {
+    List<TeamEntity> getListOfTeam(Game game) {
         List<TeamEntity> teamEntityList = new ArrayList<>();
         for (int i = 0; i < game.getTeam().size(); i++) {
             teamEntityList.add(map(game.getTeam().get(i)));
@@ -133,7 +133,7 @@ public class MappingService {
         return teamEntityList;
     }
 
-    private List<Team> getListOfTeam(GameEntity gameEntity) {
+    List<Team> getListOfTeam(GameEntity gameEntity) {
         List<Team> teamList = new ArrayList<>();
         for (int i = 0; i < gameEntity.getTeamEntity().size(); i++) {
             teamList.add(map(gameEntity.getTeamEntity().get(i)));

@@ -21,12 +21,12 @@ import java.util.List;
 public class GameController {
 
     private final GameService gameService;
-    private final RepositoryGame repositoryGame;
+    //private final RepositoryGame repositoryGame;
 
     @Autowired
-    public GameController(GameService gameService,RepositoryGame repositoryGame) {
+    public GameController(GameService gameService /*,RepositoryGame repositoryGame*/) {
         this.gameService = gameService;
-        this.repositoryGame=repositoryGame;
+      //  this.repositoryGame=repositoryGame;
     }
 
     @GetMapping("/gameList")
