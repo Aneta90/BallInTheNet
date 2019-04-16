@@ -57,7 +57,7 @@ public class PlayerService {
         return mappingService.map(player).getPlayerId();
     }
 
-    // OK
+    // OK blad implementacyjny
     public Player updatePlayer(Player player) {
         List<PlayerEntity> listOfPlayerEntity = repositoryPlayer.findAllBySurName(player.getSurName());
 

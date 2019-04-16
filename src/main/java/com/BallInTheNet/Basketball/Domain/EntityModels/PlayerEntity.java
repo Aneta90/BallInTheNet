@@ -6,7 +6,6 @@ import java.io.Serializable;
 
 @Table(name = "Players")
 @Entity
-
 public class PlayerEntity implements Serializable {
 
     @Id
