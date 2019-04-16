@@ -26,7 +26,6 @@ public class TeamService {
 
         TeamEntity teamEntity = new TeamEntity();
         teamEntity.setName(team.getName());
-        teamEntity.setGameEntity(null); //TO DO mapowanie listy
         teamEntity.setPlayerEntityList(null); //TO DO mapowanie losty
         teamEntity.setTotalScore(team.getTotalScore());
         return teamEntity;
@@ -35,7 +34,6 @@ public class TeamService {
     private Team map(TeamEntity teamEntity) {
         Team team = new Team();
         team.setName(teamEntity.getName());
-        team.setGame(null); //TO DO mapowanie listy
         team.setPlayerList(null); //TO DO mapowanie listy
         team.setTotalScore(teamEntity.getTotalScore());
         return team;
@@ -84,7 +82,6 @@ public class TeamService {
         if (repositoryTeam.existsById(id)) {
             TeamEntity newEntity = repositoryTeam.findById(id).get();
             newEntity.setName(team.getName());
-            newEntity.setGameEntity(null); // TO DO mapowanie listy
             newEntity.setPlayerEntityList(null);//TO DO mapowanie listy
             newEntity.setTotalScore(team.getTotalScore());
             repositoryTeam.save(newEntity);

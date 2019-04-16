@@ -22,6 +22,7 @@ public class MappingService {
 
         GameEntity gameEntity = new GameEntity();
         gameEntity.setTeamHomeId(game.getTeamHomeId());
+        gameEntity.setTeamAwayId(game.getTeamAwayId());
         gameEntity.setTeamHomeName(game.getTeamHome());
         gameEntity.setTeamAwayName(game.getTeamAway());
         gameEntity.setTeamHomeScore(game.getTeamHomeScore());

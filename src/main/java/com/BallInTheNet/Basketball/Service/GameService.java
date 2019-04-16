@@ -20,7 +20,11 @@ public class GameService {
         this.repositoryGame = repositoryGame;
     }
 
+    MappingService mappingService;
+
     public GameEntity map(Game game) {
+
+        TeamEntity team = new TeamEntity();
 
         GameEntity gameEntity = new GameEntity();
         gameEntity.setTeamHomeId(game.getTeamHomeId());
@@ -77,16 +81,16 @@ public class GameService {
         return gameList;
     }
 
-    public List<Game> findByHomeTeam(String teamHome){
+    public List<Game> findByHomeTeam(String teamHomeName){
         List<Game> gameList = new ArrayList<>();
-        repositoryGame.findByTeamHome(teamHome).forEach(element-> gameList.add(map(element)));
+        repositoryGame.findByTeamHomeName(teamHomeName).forEach(element-> gameList.add(map(element)));
         return gameList;
         //return repositoryGame.findByTeamHome(teamHome).stream().map(this::map).collect(Collectors.toList());
     }
 
-    public List<Game> findByHomeAway(String teamAway){
+    public List<Game> findByHomeAway(String teamAwayName){
         List<Game> gameList = new ArrayList<>();
-        repositoryGame.findByTeamAway(teamAway).forEach(element-> gameList.add(map(element)));
+        repositoryGame.findByTeamAwayName(teamAwayName).forEach(element-> gameList.add(map(element)));
         return gameList;
         //return repositoryGame.findByTeamAway(teamAway).stream().map(this::map).collect(Collectors.toList());
     }

@@ -34,14 +34,14 @@ public class GameController {
         return gameService.getGames();
     }
 
-    @GetMapping("/gameByTeamHome/{teamHome}")
-    public List<Game> gameListByTeamHome(@PathVariable String teamHome){
-       return gameService.findByHomeTeam(teamHome);
+    @GetMapping("/gameByTeamHome/{teamHomeName}")
+    public List<Game> gameListByTeamHome(@PathVariable String teamHomeName){
+       return gameService.findByHomeTeam(teamHomeName);
     }
 
-    @GetMapping("/gameByTeamAway/{teamAway}")
-    public List<Game> gameListByTeamAway(@PathVariable String teamAway){
-         return gameService.findByHomeAway(teamAway);
+    @GetMapping("/gameByTeamAway/{teamAwayName}")
+    public List<Game> gameListByTeamAway(@PathVariable String teamAwayName){
+         return gameService.findByHomeAway(teamAwayName);
     }
 
     @GetMapping("/gameById/{game_id}")

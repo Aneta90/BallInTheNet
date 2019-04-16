@@ -14,22 +14,14 @@ import java.util.List;
         @GeneratedValue(strategy = GenerationType.AUTO)
         private Long gameId;
 
-        @OneToMany(mappedBy = "teamId")
-        private Long teamHomeId;
+        private Long teamHomeId; //brak polaczenia z Teamem
 
-        @OneToMany(mappedBy = "teamId")
-        private Long teamAwayId;
+        private Long teamAwayId; // brak polaczeni z Teamem -> jak polaczyc dwa atrybuty z GameEntity(teamHomeId,teamAwayId) z jednym teamId z TeamEntity? Oto jest pytanie !
 
-        private String teamHomeName;//??
+        private String teamHomeName;
 
-        private String teamAwayName;//??
+        private String teamAwayName;
 
-        //@ManyToMany(cascade = CascadeType.ALL)
-        /*@JsonBackReference
-        @JoinTable(name = "games_teams",
-                joinColumns = @JoinColumn(name = "gameId", referencedColumnName = "gameId"),
-                inverseJoinColumns = @JoinColumn(name = "teamId", referencedColumnName = "teamId"))*/
-        //private List<TeamEntity> teamEntity;
 
         @Column(name = "teamHomeScore"/*, nullable = false*/)
         private Integer teamHomeScore;

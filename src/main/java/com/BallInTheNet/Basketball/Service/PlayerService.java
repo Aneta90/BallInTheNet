@@ -119,7 +119,7 @@ public class PlayerService {
 
     // OK
     public List<Player> listOfInjuredPlayers() {
-        List<PlayerEntity> playerEntityList = repositoryPlayer.findAllByInjuredIsTrue();
+        List<PlayerEntity> playerEntityList = repositoryPlayer.findAllByIsInjuredIsTrue();
         List<Player> playerList = new ArrayList<>();
         for (PlayerEntity playerEntity : playerEntityList) {
             playerList.add(mappingService.map(playerEntity));

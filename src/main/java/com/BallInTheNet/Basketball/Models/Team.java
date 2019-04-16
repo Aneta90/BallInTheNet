@@ -1,5 +1,7 @@
 package com.BallInTheNet.Basketball.Models;
 
+import com.BallInTheNet.Basketball.Domain.EntityModels.GameEntity;
+
 import java.util.List;
 
 
@@ -8,17 +10,16 @@ public class Team {
     private String name;
     private List<Player> playerList;
     private Long totalScore;
-    private Game game;
 
     public Team() {
     }
 
-    public Team(String name, List<Player> playerList, Long totalScore, Game game) {
+    public Team(String name, List<Player> playerList, Long totalScore) {
         this.name = name;
         this.playerList = playerList;
         this.totalScore = totalScore;
-        this.game = game;
     }
+
 
     public String getName() {
         return name;
@@ -45,13 +46,6 @@ public class Team {
         this.totalScore = totalScore;
     }
 
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
 
     @Override
     public String toString() {
@@ -59,7 +53,6 @@ public class Team {
                 "name='" + name + '\'' +
                 ", playerList=" + playerList +
                 ", totalScore=" + totalScore +
-                ", game=" + game +
                 '}';
     }
 }

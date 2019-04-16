@@ -19,5 +19,5 @@ public interface RepositoryPlayer extends JpaRepository<PlayerEntity,Long> {
 
     List <PlayerEntity> findAllByAgeBefore(int age);
 
-    List<PlayerEntity> findAllByInjuredIsTrue();
+    List<PlayerEntity> findAllByIsInjuredIsTrue();
 }

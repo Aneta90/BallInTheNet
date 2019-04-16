@@ -33,7 +33,6 @@ public class PlayerEntity implements Serializable {
     private Integer rating;
 
     @ManyToOne
-    @JoinColumn(name = "teamId")
     private TeamEntity teamEntity;
 
     public PlayerEntity() {
@@ -113,12 +112,18 @@ public class PlayerEntity implements Serializable {
         this.rating = rating;
     }
 
+
     @Override
     public String toString() {
         return "PlayerEntity{" +
-                "firstName='" + firstName + '\'' +
+                "playerId=" + playerId +
+                ", firstName='" + firstName + '\'' +
                 ", surName='" + surName + '\'' +
                 ", age=" + age +
+                ", experience=" + experience +
+                ", isInjured=" + isInjured +
+                ", rating=" + rating +
+                ", teamEntity=" + teamEntity +
                 '}';
     }
 }

@@ -1,8 +1,5 @@
 package com.BallInTheNet.Basketball.Domain.EntityModels;
-
-
-import lombok.AccessLevel;
-import lombok.Setter;
+import com.BallInTheNet.Basketball.Models.Game;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -20,16 +17,9 @@ public class TeamEntity implements Serializable {
 
     private String name;
 
-    //@LazyCollection(LazyCollectionOption.FALSE)
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "teamEntity", cascade = CascadeType.ALL)
     private List<PlayerEntity> playerEntityList;
-
-    //@LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany//(mappedBy = "teamEntity")
-    @JoinTable(name = "games_teams",
-            joinColumns = @JoinColumn(name = "teamId", referencedColumnName = "teamId"),
-            inverseJoinColumns = @JoinColumn(name = "gameId", referencedColumnName = "gameId"))
-    private List<GameEntity> gameEntity;
 
     //@Setter(AccessLevel.NONE)
     private Long totalScore;
@@ -37,10 +27,9 @@ public class TeamEntity implements Serializable {
     public TeamEntity() {
     }
 
-    public TeamEntity(String name, List<PlayerEntity> playerEntityList, List<GameEntity> gameEntity, Long totalScore) {
+    public TeamEntity(String name, List<PlayerEntity> playerEntityList, Long totalScore) {
         this.name = name;
         this.playerEntityList = playerEntityList;
-        this.gameEntity = gameEntity;
         this.totalScore = totalScore;
     }
 
@@ -68,13 +57,6 @@ public class TeamEntity implements Serializable {
         this.playerEntityList = playerEntityList;
     }
 
-    public List<GameEntity> getGameEntity() {
-        return gameEntity;
-    }
-
-    public void setGameEntity(List<GameEntity> gameEntity) {
-        this.gameEntity = gameEntity;
-    }
 
     public Long getTotalScore() {
         return totalScore;
@@ -90,7 +72,6 @@ public class TeamEntity implements Serializable {
                 "teamId=" + teamId +
                 ", name='" + name + '\'' +
                 ", playerEntityList=" + playerEntityList +
-                ", gameEntity=" + gameEntity +
                 ", totalScore=" + totalScore +
                 '}';
     }

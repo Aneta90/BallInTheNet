@@ -12,8 +12,8 @@ import java.util.List;
 @Repository
 public interface RepositoryGame extends JpaRepository<GameEntity,Long> {
 
-    List<GameEntity> findByTeamHome(String teamHome);
-    List<GameEntity> findByTeamAway(String teamAway);
+    List<GameEntity> findByTeamHomeName(String teamHomeName);
+    List<GameEntity> findByTeamAwayName(String teamAwayName);
     @Query("Select g from GameEntity g where g.date > CURRENT_DATE")
     List<GameEntity> findByFutureGames();
     GameEntity findGameByGameId(Long game_id); //??TpRemove??
