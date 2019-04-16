@@ -14,16 +14,22 @@ import java.util.List;
         @GeneratedValue(strategy = GenerationType.AUTO)
         private Long gameId;
 
-        private String teamHome; //id
+        @OneToMany(mappedBy = "teamId")
+        private Long teamHomeId;
 
-        private String teamAway;
+        @OneToMany(mappedBy = "teamId")
+        private Long teamAwayId;
 
-        @ManyToMany(cascade = CascadeType.ALL)
-        @JsonBackReference
+        private String teamHomeName;//??
+
+        private String teamAwayName;//??
+
+        //@ManyToMany(cascade = CascadeType.ALL)
+        /*@JsonBackReference
         @JoinTable(name = "games_teams",
                 joinColumns = @JoinColumn(name = "gameId", referencedColumnName = "gameId"),
-                inverseJoinColumns = @JoinColumn(name = "teamId", referencedColumnName = "teamId"))
-        private List<TeamEntity> teamEntity;
+                inverseJoinColumns = @JoinColumn(name = "teamId", referencedColumnName = "teamId"))*/
+        //private List<TeamEntity> teamEntity;
 
         @Column(name = "teamHomeScore"/*, nullable = false*/)
         private Integer teamHomeScore;
@@ -43,20 +49,35 @@ import java.util.List;
         public GameEntity() {
         }
 
-        public GameEntity(String teamHome, String teamAway, Integer teamHomeScore,
-                          Integer teamAwayScore, Boolean isTeamHomeWin, Boolean isTeamAwayWin, List<TeamEntity> teamEntity, LocalDate date) {
-            this.teamHome = teamHome;
-            this.teamAway = teamAway;
-            this.teamHomeScore = teamHomeScore;
-            this.teamAwayScore = teamAwayScore;
-            this.isTeamHomeWin = isTeamHomeWin;
-            this.isTeamAwayWin = isTeamAwayWin;
-            this.teamEntity = teamEntity;
-            this.date = date;
-        }
+       public GameEntity(Long teamHomeId, Long teamAwayId, String teamHomeName, String teamAwayName, Integer teamHomeScore, Integer teamAwayScore, Boolean isTeamHomeWin, Boolean isTeamAwayWin, LocalDate date) {
+           this.teamHomeId = teamHomeId;
+           this.teamAwayId = teamAwayId;
+           this.teamHomeName = teamHomeName;
+           this.teamAwayName = teamAwayName;
+           this.teamHomeScore = teamHomeScore;
+           this.teamAwayScore = teamAwayScore;
+           this.isTeamHomeWin = isTeamHomeWin;
+           this.isTeamAwayWin = isTeamAwayWin;
+           this.date = date;
+       }
 
+       public Long getTeamHomeId() {
+           return teamHomeId;
+       }
 
-        public Long getGameId() {
+       public void setTeamHomeId(Long teamHomeId) {
+           this.teamHomeId = teamHomeId;
+       }
+
+       public Long getTeamAwayId() {
+           return teamAwayId;
+       }
+
+       public void setTeamAwayId(Long teamAwayId) {
+           this.teamAwayId = teamAwayId;
+       }
+
+       public Long getGameId() {
             return gameId;
         }
 
@@ -64,23 +85,24 @@ import java.util.List;
             this.gameId = gameId;
         }
 
-        public String getTeamHome() {
-            return teamHome;
-        }
 
-        public void setTeamHome(String teamHome) {
-            this.teamHome = teamHome;
-        }
+       public String getTeamHomeName() {
+           return teamHomeName;
+       }
 
-        public String getTeamAway() {
-            return teamAway;
-        }
+       public void setTeamHomeName(String teamHomeName) {
+           this.teamHomeName = teamHomeName;
+       }
 
-        public void setTeamAway(String teamAway) {
-            this.teamAway = teamAway;
-        }
+       public String getTeamAwayName() {
+           return teamAwayName;
+       }
 
-        public Integer getTeamHomeScore() {
+       public void setTeamAwayName(String teamAwayName) {
+           this.teamAwayName = teamAwayName;
+       }
+
+       public Integer getTeamHomeScore() {
             return teamHomeScore;
         }
 
@@ -112,13 +134,13 @@ import java.util.List;
             isTeamAwayWin = teamAwayWin;
         }
 
-        public List<TeamEntity> getTeamEntity() {
+        /*public List<TeamEntity> getTeamEntity() {
             return teamEntity;
         }
 
         public void setTeamEntity(List<TeamEntity> teamEntity) {
             this.teamEntity = teamEntity;
-        }
+        }*/
 
         public LocalDate getDate() {
             return date;
@@ -132,9 +154,9 @@ import java.util.List;
        public String toString() {
            return "GameEntity{" +
                    "gameId=" + gameId +
-                   ", teamHome='" + teamHome + '\'' +
-                   ", teamAway='" + teamAway + '\'' +
-                   ", teamEntity=" + teamEntity +
+                   ", teamHomeName='" + teamHomeName + '\'' +
+                   ", teamAwayName='" + teamAwayName + '\'' +
+                  // ", teamEntity=" + teamEntity +
                    ", teamHomeScore=" + teamHomeScore +
                    ", teamAwayScore=" + teamAwayScore +
                    ", isTeamHomeWin=" + isTeamHomeWin +

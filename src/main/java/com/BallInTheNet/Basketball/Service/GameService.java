@@ -23,10 +23,10 @@ public class GameService {
     public GameEntity map(Game game) {
 
         GameEntity gameEntity = new GameEntity();
-        gameEntity.setTeamHome(game.getTeamHome());
-        gameEntity.setTeamAway(game.getTeamAway());
-        gameEntity.setTeamEntity(null);
-        //brakuje listy ustawiona jest na NULL na razie
+        gameEntity.setTeamHomeId(game.getTeamHomeId());
+        gameEntity.setTeamAwayId(game.getTeamAwayId());
+        gameEntity.setTeamAwayName(game.getTeamHome());
+        gameEntity.setTeamAwayName(game.getTeamAway());
         gameEntity.setTeamHomeScore(game.getTeamHomeScore());
         gameEntity.setTeamAwayScore(game.getTeamAwayScore());
         gameEntity.setTeamHomeWin(game.getTeamHomeWin());
@@ -36,8 +36,7 @@ public class GameService {
     }
 
     public Game map(GameEntity gameEntity) {
-        return new Game(gameEntity.getTeamHome(), gameEntity.getTeamAway(), gameEntity.getTeamHomeScore(), gameEntity.getTeamAwayScore(), gameEntity.getTeamHomeWin(), gameEntity.getTeamAwayWin(),null, gameEntity.getDate());
-//brakuje listy ustawiona na NULL na razie
+        return new Game(gameEntity.getTeamHomeId(), gameEntity.getTeamAwayId(),gameEntity.getTeamHomeName(), gameEntity.getTeamAwayName(), gameEntity.getTeamHomeScore(), gameEntity.getTeamAwayScore(), gameEntity.getTeamHomeWin(), gameEntity.getTeamAwayWin(), gameEntity.getDate());
     }
 
     public Long addGame(Game game){
@@ -57,8 +56,10 @@ public class GameService {
 
         if (repositoryGame.existsById(id)) {
             GameEntity newEntity=repositoryGame.findById(id).get();
-            newEntity.setTeamHome(game.getTeamHome());
-            newEntity.setTeamAway(game.getTeamAway());
+            newEntity.setTeamHomeId(game.getTeamHomeId());
+            newEntity.setTeamAwayId(game.getTeamAwayId());
+            newEntity.setTeamHomeName(game.getTeamHome());
+            newEntity.setTeamAwayName(game.getTeamAway());
             newEntity.setTeamHomeScore(game.getTeamHomeScore());
             newEntity.setTeamAwayScore(game.getTeamAwayScore());
             newEntity.setTeamHomeWin(game.getTeamHomeWin());

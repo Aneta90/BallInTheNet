@@ -21,9 +21,9 @@ public class MappingService {
         team.setName("Wawa");
 
         GameEntity gameEntity = new GameEntity();
-        gameEntity.setTeamHome(game.getTeamHome());
-        gameEntity.setTeamAway(game.getTeamAway());
-        gameEntity.getTeamEntity().add(team);
+        gameEntity.setTeamHomeId(game.getTeamHomeId());
+        gameEntity.setTeamHomeName(game.getTeamHome());
+        gameEntity.setTeamAwayName(game.getTeamAway());
         gameEntity.setTeamHomeScore(game.getTeamHomeScore());
         gameEntity.setTeamAwayScore(game.getTeamAwayScore());
         gameEntity.setTeamHomeWin(game.getTeamHomeWin());
@@ -34,13 +34,11 @@ public class MappingService {
 
     public Game map(GameEntity gameEntity) {
 
-        Team team = new Team();
-        team.setName("Cracovia");
-
         Game game = new Game();
-        game.setTeamHome(gameEntity.getTeamHome());
-        game.setTeamAway(gameEntity.getTeamAway());
-        game.getTeam().add(team);
+        game.setTeamHomeId(gameEntity.getTeamHomeId());
+        game.setTeamAwayId(gameEntity.getTeamAwayId());
+        game.setTeamHome(gameEntity.getTeamHomeName());
+        game.setTeamAway(gameEntity.getTeamAwayName());
         game.setTeamHomeScore(gameEntity.getTeamHomeScore());
         game.setTeamAwayScore(gameEntity.getTeamAwayScore());
         game.setTeamHomeWin(gameEntity.getTeamHomeWin());
@@ -54,8 +52,7 @@ public class MappingService {
 
         TeamEntity teamEntity = new TeamEntity();
         teamEntity.setName(team.getName());
-        teamEntity.setGameEntity(getListOfGame(team));
-        teamEntity.setPlayerEntityList(getListOfPlayers(team));
+        teamEntity.setPlayerEntityList(null);
         teamEntity.setTotalScore(team.getTotalScore());
         return teamEntity;
     }
@@ -63,8 +60,7 @@ public class MappingService {
     public Team map(TeamEntity teamEntity) {
         Team team = new Team();
         team.setName(teamEntity.getName());
-        team.setGame(getListOfGame(teamEntity));
-        team.setPlayerList(getListOfPlayers(teamEntity));
+        team.setPlayerList(null);
         team.setTotalScore(teamEntity.getTotalScore());
         return team;
     }
@@ -94,11 +90,12 @@ public class MappingService {
         player.setTeam(map(playerEntity.getTeamEntity()));
         return player;
     }
-
+}
+/*
     //support method
     private List<GameEntity> getListOfGame(Team team) {
         List<GameEntity> listOfGameEntity = new ArrayList<>();
-        for (int i = 0; i < team.getGame().size(); i++) {
+        for (int i = 0; i < team().size(); i++) {
             listOfGameEntity.add(map(team.getGame().get(i)));
         }
         return listOfGameEntity;
@@ -142,5 +139,5 @@ public class MappingService {
             teamList.add(map(gameEntity.getTeamEntity().get(i)));
         }
         return teamList;
-    }
-}
+    }*/
+

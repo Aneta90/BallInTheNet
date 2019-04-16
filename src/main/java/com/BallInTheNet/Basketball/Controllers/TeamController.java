@@ -64,15 +64,15 @@ public class TeamController {
         }
     }
 
-    @GetMapping("/{name}/game") //nie dziala
+   /* @GetMapping("/{name}/game") //nie dziala
     public ResponseEntity<Collection<Game>> getGameTeam(@PathVariable String name) { //accesing game from a given team
         Team team = teamService.findByNameEquals(name);
 
         if (team != null) {
-            return new ResponseEntity<>(team.getGame(), HttpStatus.OK);
+            return new ResponseEntity<>(team.get, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
-    }
+    }*/
 
 }

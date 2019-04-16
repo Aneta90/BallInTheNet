@@ -12,8 +12,6 @@ import java.util.List;
 public class TeamService {
 
 
-    private final RepositoryMySQL repositoryMySQL; //??
-
     private final GameService gameService; //??
 
     private final PlayerService playerService;//?
@@ -22,9 +20,8 @@ public class TeamService {
 
 
     @Autowired
-    public TeamService(RepositoryTeam repositoryTeam, RepositoryMySQL repositoryMySQL,GameService gameService,PlayerService playerService) {
+    public TeamService(RepositoryTeam repositoryTeam, GameService gameService,PlayerService playerService) {
         this.repositoryTeam= repositoryTeam;
-        this.repositoryMySQL=repositoryMySQL; //??
         this.gameService=gameService; //??
         this.playerService=playerService;//??
     }
@@ -33,8 +30,7 @@ public class TeamService {
 
         TeamEntity teamEntity = new TeamEntity();
         teamEntity.setName(team.getName());
-        teamEntity.setGameEntity(null); //TO DO mapowanie listy
-        teamEntity.setPlayerEntityList(null); //TO DO mapowanie losty
+        teamEntity.setPlayerEntityList(null); //TO DO mapowanie listy
         teamEntity.setTotalScore(team.getTotalScore());
         return teamEntity;
     }
@@ -42,7 +38,6 @@ public class TeamService {
     private Team map(TeamEntity teamEntity) {
         Team team = new Team();
         team.setName(teamEntity.getName());
-        team.setGame(null); //TO DO mapowanie listy
         team.setPlayerList(null); //TO DO mapowanie listy
         team.setTotalScore(teamEntity.getTotalScore());
         return team;
@@ -91,7 +86,6 @@ public class TeamService {
         if (repositoryTeam.existsById(id)) {
             TeamEntity newEntity=repositoryTeam.findById(id).get();
             newEntity.setName(team.getName());
-            newEntity.setGameEntity(null); // TO DO mapowanie listy
             newEntity.setPlayerEntityList(null);//TO DO mapowanie listy
             newEntity.setTotalScore(team.getTotalScore());
             repositoryTeam.save(newEntity);

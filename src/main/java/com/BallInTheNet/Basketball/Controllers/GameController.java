@@ -75,7 +75,7 @@ public class GameController {
         }
     }
 
-    @RequestMapping(value="/{game_id}/team",method = RequestMethod.GET) //próba nie działa
+  /*  @RequestMapping(value="/{game_id}/team",method = RequestMethod.GET) //próba nie działa
     public ResponseEntity<Collection<Team>> getTeamGame(@PathVariable long game_id) { //accesing team from a given game
         Game game = gameService.findGameById(game_id);
         //GameEntity game = repositoryGame.findOne(game_id);
@@ -85,7 +85,7 @@ public class GameController {
         } else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
-    }
+    }*/
 
     }
 

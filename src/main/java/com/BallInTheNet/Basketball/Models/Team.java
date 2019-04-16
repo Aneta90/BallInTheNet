@@ -7,17 +7,17 @@ public class Team {
 
     private String name;
     private List<Player> playerList;
-    private List<Game> game;
     private Long totalScore;
+    private Game game;
 
     public Team() {
     }
 
-    public Team(String name, List<Player> playerList, List<Game> game, Long totalScore) {
+    public Team(String name, List<Player> playerList, Long totalScore, Game game) {
         this.name = name;
         this.playerList = playerList;
-        this.game = game;
         this.totalScore = totalScore;
+        this.game = game;
     }
 
     public String getName() {
@@ -36,13 +36,6 @@ public class Team {
         this.playerList = playerList;
     }
 
-    public List<Game> getGame() {
-        return game;
-    }
-
-    public void setGame(List<Game> game) {
-        this.game = game;
-    }
 
     public Long getTotalScore() {
         return totalScore;
@@ -52,13 +45,21 @@ public class Team {
         this.totalScore = totalScore;
     }
 
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
     @Override
     public String toString() {
-        return "TeamEntity{" +
-                ", name='" + name + '\'' +
+        return "Team{" +
+                "name='" + name + '\'' +
                 ", playerList=" + playerList +
-                ", game=" + game +
                 ", totalScore=" + totalScore +
+                ", game=" + game +
                 '}';
     }
 }

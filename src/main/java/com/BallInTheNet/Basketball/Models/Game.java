@@ -6,9 +6,10 @@ import java.util.List;
 
 public class Game {
 
+    private Long teamHomeId;
+    private Long teamAwayId;
     private String teamHome;
     private String teamAway;
-    private List<Team> team;
     private Integer teamHomeScore;
     private Integer teamAwayScore;
     private Boolean isTeamHomeWin;
@@ -18,18 +19,33 @@ public class Game {
     public Game() {
     }
 
-    public Game(String teamHome, String teamAway, Integer teamHomeScore,
-                Integer teamAwayScore, Boolean isTeamHomeWin, Boolean isTeamAwayWin, List<Team> team, LocalDate date) {
+    public Game(Long teamHomeId, Long teamAwayId, String teamHome, String teamAway, Integer teamHomeScore, Integer teamAwayScore, Boolean isTeamHomeWin, Boolean isTeamAwayWin, LocalDate date) {
+        this.teamHomeId = teamHomeId;
+        this.teamAwayId = teamAwayId;
         this.teamHome = teamHome;
         this.teamAway = teamAway;
         this.teamHomeScore = teamHomeScore;
         this.teamAwayScore = teamAwayScore;
         this.isTeamHomeWin = isTeamHomeWin;
         this.isTeamAwayWin = isTeamAwayWin;
-        this.team = team;
         this.date = date;
     }
 
+    public Long getTeamHomeId() {
+        return teamHomeId;
+    }
+
+    public void setTeamHomeId(Long teamHomeId) {
+        this.teamHomeId = teamHomeId;
+    }
+
+    public Long getTeamAwayId() {
+        return teamAwayId;
+    }
+
+    public void setTeamAwayId(Long teamAwayId) {
+        this.teamAwayId = teamAwayId;
+    }
 
     public String getTeamHome() {
         return teamHome;
@@ -78,13 +94,6 @@ public class Game {
         isTeamAwayWin = teamAwayWin;
     }
 
-    public List<Team> getTeam() {
-        return team;
-    }
-
-    public void setTeam(List<Team> team) {
-        this.team = team;
-    }
 
     public LocalDate getDate() {
         return date;
@@ -99,7 +108,6 @@ public class Game {
         return "Game{" +
                 "teamHome='" + teamHome + '\'' +
                 ", teamAway='" + teamAway + '\'' +
-                ", team=" + team +
                 ", teamHomeScore=" + teamHomeScore +
                 ", teamAwayScore=" + teamAwayScore +
                 ", isTeamHomeWin=" + isTeamHomeWin +
