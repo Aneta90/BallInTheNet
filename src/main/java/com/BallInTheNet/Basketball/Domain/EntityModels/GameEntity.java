@@ -54,7 +54,6 @@ import java.util.List;
        }
 
 
-
        public Long getTeamHomeId() {
            return teamHomeId;
        }
