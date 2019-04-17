@@ -14,8 +14,6 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +21,8 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 @DataJpaTest
-@RunWith(MockitoJUnitRunner.Silent.class)
 @ActiveProfiles("test")
+@RunWith(MockitoJUnitRunner.class)
 public class PlayerServiceTest {
 
     @Mock

@@ -2,14 +2,13 @@ package com.BallInTheNet.Basketball.Service;
 
 import com.BallInTheNet.Basketball.Domain.EntityModels.PlayerEntity;
 import com.BallInTheNet.Basketball.Domain.Repository.RepositoryPlayer;
-import com.BallInTheNet.Basketball.Domain.Repository.RepositoryTeam;
 import com.BallInTheNet.Basketball.Models.Player;
+import com.BallInTheNet.Basketball.Models.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Service
 public class PlayerService {
@@ -20,19 +19,14 @@ public class PlayerService {
     private final
     RepositoryPlayer repositoryPlayer;
 
-    private final
-    RepositoryTeam repositoryTeam;
-
     @Autowired
-    public PlayerService(MappingService mappingService, RepositoryPlayer repositoryPlayer,
-                         RepositoryTeam repositoryTeam) {
+    public PlayerService(MappingService mappingService, RepositoryPlayer repositoryPlayer) {
         this.mappingService = mappingService;
         this.repositoryPlayer = repositoryPlayer;
-        this.repositoryTeam = repositoryTeam;
     }
 
-    // OK
-    public List<Player> getListOfPlayer() {
+
+     public List<Player> getListOfPlayer() {
         List<PlayerEntity> playerEntityList = repositoryPlayer.findAll();
         List<Player> playerList = new ArrayList<>();
         for (PlayerEntity playerEntity : playerEntityList) {
@@ -41,10 +35,8 @@ public class PlayerService {
         return playerList;
     }
 
-    // OK
-    public List<Player> findAllPlayersInTeam(String teamName) {
-        List<PlayerEntity> playerEntityList =
-                repositoryPlayer.findAllByTeamEntity(repositoryTeam.findByNameEquals(teamName));
+   public List<Player> findAllPlayersInTeam(Team team) { //do zostawienia -- metoda Sebka
+        List<PlayerEntity> playerEntityList = repositoryPlayer.findAllByTeamEntity(mappingService.map(team));
         List<Player> playerList = new ArrayList<>();
         for (PlayerEntity playerEntity : playerEntityList) {
             playerList.add(mappingService.map(playerEntity));
@@ -52,95 +44,34 @@ public class PlayerService {
         return playerList;
     }
 
-    // OK
-    public Long savePlayer(Player player) {
-        return mappingService.map(player).getPlayerId();
+   public List<PlayerEntity> findAllPlayersEntitiesInTeam(Team team) { //??do usunięcia??
+       return repositoryPlayer.findAllByTeamEntity(mappingService.map(team));
     }
 
-    // OK blad implementacyjny
+    public Boolean savePlayer(PlayerEntity playerEntity) {
+
+        // skonczyc implementacje
+        return false;
+    }
+
     public Player updatePlayer(Player player) {
         List<PlayerEntity> listOfPlayerEntity = repositoryPlayer.findAllBySurName(player.getSurName());
 
-        for (PlayerEntity playerEntity1 : listOfPlayerEntity) {
-            if (mappingService.map(playerEntity1) == (player)) {
-                playerEntity1.setFirstName(player.getFirstName());
-                playerEntity1.setSurName(player.getSurName());
-                playerEntity1.setTeamEntity(mappingService.map(player.getTeam()));
-                playerEntity1.setRating(player.getRating());
-                playerEntity1.setInjured(player.getInjured());
-                playerEntity1.setAge(player.getAge());
-                playerEntity1.setExperience(player.getExperience());
-                savePlayer(player);
+        for (int i = 0; i < listOfPlayerEntity.size(); i++) {
+            if (mappingService.map(listOfPlayerEntity.get(i)) == (player)) { //equals??
+                PlayerEntity playerEntity = listOfPlayerEntity.get(i);
+                playerEntity.setFirstName(player.getFirstName());
+                playerEntity.setSurName(player.getSurName());
+                playerEntity.setTeamEntity(mappingService.map(player.getTeam()));
+                playerEntity.setRating(player.getRating());
+                playerEntity.setInjured(player.getInjured());
+                playerEntity.setAge(player.getAge());
+                playerEntity.setExperience(player.getExperience());
+                savePlayer(playerEntity);
                 return player;
             }
-        }
-        return null; //cos popkminic co tu mozna zwrocic? Rzucic wyjatkiem moze?
-    }
 
-    // OK
-    public List<Player> playersWithGivenName(String name) {
-        List<PlayerEntity> playerEntityList = repositoryPlayer.findAllBySurName(name);
-        List<Player> playerList = new ArrayList<>();
-        for (PlayerEntity playerEntity : playerEntityList) {
-            playerList.add(mappingService.map(playerEntity));
-        }
-        return playerList;
-    }
 
-    // OK
-    public List<Player> findOlderThen(int age) {
-        List<PlayerEntity> playerEntityList = repositoryPlayer.findAllByAgeAfter(age);
-        List<Player> playerList = new ArrayList<>();
-        for (PlayerEntity playerEntity : playerEntityList) {
-            playerList.add(mappingService.map(playerEntity));
-        }
-        return playerList;
-    }
-
-    // OK
-    public List<Player> findYoungerThen(int age) {
-        List<PlayerEntity> playerEntityList = repositoryPlayer.findAllByAgeBefore(age);
-        List<Player> playerList = new ArrayList<>();
-        for (PlayerEntity playerEntity : playerEntityList) {
-            playerList.add(mappingService.map(playerEntity));
-        }
-        return playerList;
-    }
-
-    // OK
-    public Boolean removePlayer(Long id) {
-        boolean isDeleted = false;
-        if (repositoryPlayer.existsById(id)) {
-            repositoryPlayer.deleteById(id);
-            isDeleted = true;
-        }
-        return isDeleted;
-    }
-
-    // OK
-    public List<Player> listOfInjuredPlayers() {
-        List<PlayerEntity> playerEntityList = repositoryPlayer.findAllByIsInjuredIsTrue();
-        List<Player> playerList = new ArrayList<>();
-        for (PlayerEntity playerEntity : playerEntityList) {
-            playerList.add(mappingService.map(playerEntity));
-        }
-        return playerList;
-
-    }
-
-    // do poprawy mapowania
-    public Player editPlayer(Player player, Long id) {
-        if (repositoryPlayer.existsById(id)) {
-            PlayerEntity playerEntity = repositoryPlayer.getOne(id);
-            playerEntity.setExperience(player.getExperience());
-            playerEntity.setAge(player.getAge());
-            playerEntity.setInjured(player.getInjured());
-            playerEntity.setRating(player.getRating());
-            playerEntity.setTeamEntity(null); //do przepatrzenia...
-            playerEntity.setFirstName(player.getFirstName());
-            playerEntity.setSurName(player.getSurName());
-            repositoryPlayer.save(playerEntity);
-            return mappingService.map(playerEntity);
         }
         return null;
     }
