@@ -2,6 +2,7 @@ package com.BallInTheNet.Basketball.Service;
 
 import com.BallInTheNet.Basketball.Domain.EntityModels.PlayerEntity;
 import com.BallInTheNet.Basketball.Domain.Repository.RepositoryPlayer;
+import com.BallInTheNet.Basketball.Domain.Repository.RepositoryTeam;
 import com.BallInTheNet.Basketball.Models.Player;
 import com.BallInTheNet.Basketball.Models.Team;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class PlayerService {
     RepositoryPlayer repositoryPlayer;
 
     @Autowired
-    public PlayerService(MappingService mappingService, RepositoryPlayer repositoryPlayer) {
+    public PlayerService(MappingService mappingService, RepositoryPlayer repositoryPlayer, RepositoryTeam repositoryTeam) {
         this.mappingService = mappingService;
         this.repositoryPlayer = repositoryPlayer;
     }

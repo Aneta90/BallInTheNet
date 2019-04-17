@@ -53,6 +53,8 @@ import java.util.List;
            this.date = date;
        }
 
+
+
        public Long getTeamHomeId() {
            return teamHomeId;
        }
@@ -76,7 +78,6 @@ import java.util.List;
         public void setGameId(Long gameId) {
             this.gameId = gameId;
         }
-
 
        public String getTeamHomeName() {
            return teamHomeName;

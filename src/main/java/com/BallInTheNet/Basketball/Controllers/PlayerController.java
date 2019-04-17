@@ -1,5 +1,5 @@
 package com.BallInTheNet.Basketball.Controllers;
-
+/*
 import com.BallInTheNet.Basketball.Models.Player;
 import com.BallInTheNet.Basketball.Service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,3 +67,4 @@ public class PlayerController {
         return playerService.listOfInjuredPlayers();
     }
 }
+*/

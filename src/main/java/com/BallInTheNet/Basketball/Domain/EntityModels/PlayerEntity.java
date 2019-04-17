@@ -38,13 +38,13 @@ public class PlayerEntity implements Serializable {
     public PlayerEntity() {
     }
 
-    public PlayerEntity(String firstName, String surName, Integer age, Integer experience,
-                        Boolean isInjured, TeamEntity teamEntity) {
+    public PlayerEntity(String firstName, String surName, Integer age, Integer experience, Boolean isInjured, Integer rating, TeamEntity teamEntity) {
         this.firstName = firstName;
         this.surName = surName;
         this.age = age;
         this.experience = experience;
         this.isInjured = isInjured;
+        this.rating = rating;
         this.teamEntity = teamEntity;
     }
 

@@ -1,6 +1,6 @@
 package com.BallInTheNet.Basketball.Service;
 
-import antlr.collections.impl.LList;
+/*
 import com.BallInTheNet.Basketball.Domain.EntityModels.PlayerEntity;
 import com.BallInTheNet.Basketball.Domain.Repository.RepositoryPlayer;
 import com.BallInTheNet.Basketball.Domain.Repository.RepositoryTeam;
@@ -123,7 +123,7 @@ public class PlayerServiceTest {
     @Test
     public void findOlderThen() {
         int age = 29;
-        when(repositoryPlayer.findAllByAgeAfter(age)).thenReturn(listOfPlayerEntityOlderThen);
+        when(repositoryPlayer.findAllByAge(age)).thenReturn(listOfPlayerEntityOlderThen);
         List<Player> playerList = playerService.findOlderThen(age);
         when(mappingService.map(listOfPlayerEntityOlderThen.get(0))).thenReturn(listOfPlayerOlderThen.get(0));
         assertEquals(1, playerList.size());
@@ -141,7 +141,7 @@ public class PlayerServiceTest {
 
     @Test
     public void listOfInjuredPlayers() {
-        when(repositoryPlayer.findAllByIsInjuredIsTrue()).thenReturn(listOfInjuredPlayersEntity);
+        when(repositoryPlayer).thenReturn(listOfInjuredPlayersEntity);
         List<Player> playerList = playerService.listOfInjuredPlayers();
         assertNotEquals(playerList.size(), 0);
     }
@@ -167,3 +167,4 @@ public class PlayerServiceTest {
 
     }
 }
+*/

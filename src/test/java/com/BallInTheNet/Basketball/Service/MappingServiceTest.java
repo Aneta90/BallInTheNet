@@ -17,10 +17,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-<<<<<<< HEAD
 import org.springframework.test.context.ActiveProfiles;
-=======
->>>>>>> remotes/origin/master
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +25,8 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @DataJpaTest
-<<<<<<< HEAD
-@RunWith(MockitoJUnitRunner.Silent.class)
 @ActiveProfiles("test")
-=======
 @RunWith(MockitoJUnitRunner.class)
->>>>>>> remotes/origin/master
 public class MappingServiceTest {
 
     @Mock
@@ -131,13 +124,7 @@ public class MappingServiceTest {
         List<Game> gamesList = new ArrayList<>();
 
         teamEntity.setPlayerEntityList(playerEntityList);
-<<<<<<< HEAD
         team.setPlayerList(playerList);
-=======
-        teamEntity.setGameEntity(gameEntityList);
-        team.setPlayerList(playerList);
-        team.setGame(gamesList);
->>>>>>> remotes/origin/master
         repositoryTeam.save(teamEntity);
         repositoryPlayer.save(playerEntity1);
 
@@ -146,8 +133,7 @@ public class MappingServiceTest {
         team1.setPlayerList(playerList2);
         repositoryTeam.save(teamEntity1);
         repositoryPlayer.save(playerEntity2);
-
-
+        
     }
 
     @Test
