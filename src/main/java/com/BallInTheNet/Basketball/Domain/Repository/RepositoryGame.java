@@ -18,7 +18,7 @@ public interface RepositoryGame extends JpaRepository<GameEntity,Long> {
     List<GameEntity> findByFutureGames();
     GameEntity findGameByGameId(Long game_id); //??TpRemove??
 
-    List <GameEntity> findAllByDateAfter(LocalDate localDate);
+
     // a moze to zamiast tego Query?
     // wtedy nie trxeba bedzie testowac repo?
 }

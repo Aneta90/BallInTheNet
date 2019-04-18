@@ -27,11 +27,11 @@ public class TeamRepositoryTest {
     private RepositoryTeam teamRepository;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         TeamEntity teamEntity = new TeamEntity();
 
         List<PlayerEntity> playerList = new ArrayList<>();
-        playerList.add(new PlayerEntity("Aneta","Wrobel",30,30,true,100,teamEntity));
+        playerList.add(new PlayerEntity("Aneta", "Wrobel", 30, 30, true, 100, teamEntity));
 
         teamEntity.setName("Warsaw");
         teamEntity.setPlayerEntityList(playerList);
@@ -41,29 +41,32 @@ public class TeamRepositoryTest {
     }
 
     @Test
-    public void whenFindByName_thenReturnListOfTeams(){
+    public void whenFindByName_thenReturnListOfTeams() {
         List<TeamEntity> teamEntity = teamRepository.findByName("Warsaw");
         assertNotNull(teamEntity);
         assertEquals(Optional.ofNullable(teamEntity.get(0).getTotalScore()), Optional.of(100L));
-        assertEquals(teamEntity.size(),1);
+        assertEquals(teamEntity.size(), 1);
     }
 
     @Test
-    public void whenFindByName_thenReturnTeam(){
-        TeamEntity teamEntity = teamRepository.findByNameEquals("Warsaw");
+    public void whenFindByName_thenReturnTeam() {
+        TeamEntity teamEntity;
+        List<TeamEntity> teamEntityList = teamRepository.findByName("Warsaw");
+        teamEntity = teamEntityList.get(0);
         assertNotNull(teamEntity);
-        assertEquals(teamEntity.getName(),"Warsaw");
+        assertEquals(teamEntity.getName(), "Warsaw");
+        assertEquals(teamEntityList.size(), 1);
     }
 
     @Test
-    public void whenFindByTotalScore_thenReturnTeam(){
+    public void whenFindByTotalScore_thenReturnTeam() {
         List<TeamEntity> teamEntity = teamRepository.findByTotalScore(90L);
-        assertEquals(Optional.of(teamEntity.get(0).getTotalScore()),Optional.of(100L));
+        assertEquals(Optional.of(teamEntity.get(0).getTotalScore()), Optional.of(100L));
     }
 
     @Test
-    public void whenFindByTotalScore_thenReturnNull(){
-        List <TeamEntity> teamEntityList = teamRepository.findByTotalScore(101L);
+    public void whenFindByTotalScore_thenReturnNull() {
+        List<TeamEntity> teamEntityList = teamRepository.findByTotalScore(101L);
         assertTrue(teamEntityList.isEmpty());
     }
 

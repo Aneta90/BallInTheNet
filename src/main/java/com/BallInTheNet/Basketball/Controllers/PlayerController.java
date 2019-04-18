@@ -1,5 +1,5 @@
 package com.BallInTheNet.Basketball.Controllers;
-/*
+
 import com.BallInTheNet.Basketball.Models.Player;
 import com.BallInTheNet.Basketball.Service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,10 +47,10 @@ public class PlayerController {
         return playerService.savePlayer(player);
     }
 
-    @PutMapping("/updatePlayer")
-    public Player updatePlayer(@RequestBody Player player) {
-        return playerService.updatePlayer(player);
-    }
+//    @PutMapping("/updatePlayer")
+//    public Player updatePlayer(@RequestBody Player player) {
+//        return playerService.updatePlayer(player);
+//    }
 
     @PutMapping("/editPlayer/{id")
     public Player editPlayer(@RequestBody Player player, @PathVariable Long id) {
@@ -67,4 +67,4 @@ public class PlayerController {
         return playerService.listOfInjuredPlayers();
     }
 }
-*/
+

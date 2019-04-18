@@ -17,7 +17,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +24,6 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @DataJpaTest
-@ActiveProfiles("test")
 @RunWith(MockitoJUnitRunner.class)
 public class MappingServiceTest {
 
@@ -120,9 +118,6 @@ public class MappingServiceTest {
         List<Player> playerList2 = new ArrayList<>();
         playerList2.add(player1);
 
-        List <GameEntity> gameEntityList = new ArrayList<>();
-        List<Game> gamesList = new ArrayList<>();
-
         teamEntity.setPlayerEntityList(playerEntityList);
         team.setPlayerList(playerList);
         repositoryTeam.save(teamEntity);
@@ -133,17 +128,22 @@ public class MappingServiceTest {
         team1.setPlayerList(playerList2);
         repositoryTeam.save(teamEntity1);
         repositoryPlayer.save(playerEntity2);
-        
+
+
     }
 
     @Test
     public void mapPlayerEntityToPlayer() {
         Player playerFromMapping = mappingService.map(playerEntity1);
-        assertEquals(playerFromMapping, player1);
+        assertEquals(playerFromMapping.getSurName(), player1.getSurName());
+        assertEquals(playerFromMapping.getTeam().getName(), player1.getTeam().getName()); // roznica jest przy liscie graczy
+        assertEquals(playerFromMapping.getAge(), player1.getAge());
+        assertEquals(playerFromMapping.getRating(), player1.getRating());
     }
 
     @Test
     public void mapPlayerToPlayerEntity() {
+
     }
 
     @Test

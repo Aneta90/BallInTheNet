@@ -12,8 +12,6 @@ import java.util.List;
 @Service
 public class TeamService {
 
-
-
     private final RepositoryTeam repositoryTeam;
 
 
@@ -52,9 +50,13 @@ public class TeamService {
     }
 
     public Team findByNameEquals(String teamName) {
-        TeamEntity teamEntity;
-        teamEntity = repositoryTeam.findByNameEquals(teamName);
-        return map(teamEntity);
+        List<TeamEntity> teamEntityList = repositoryTeam.findByName(teamName);
+        if (teamEntityList.size() > 1) {
+            System.out.println("Wrong implementation");// zabezpeiczneie przez posiadaniem 2 takich samymch teamow w bazie do skonczenia
+            return null;
+        }
+
+        return map(teamEntityList.get(0));
     }
 
     public List<Team> findByTotalScore(Long totalScore) {
@@ -62,7 +64,6 @@ public class TeamService {
         repositoryTeam.findByTotalScore(totalScore).forEach(element -> teamList.add(map(element)));
         return teamList;
     }
-
 
     public Long addTeam(Team team) {
         return repositoryTeam.save(map(team)).getTeamId();

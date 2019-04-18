@@ -11,15 +11,12 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Service
 public class MappingService {
     //game mapping
 
     GameEntity map(Game game) {
-
-        TeamEntity team = new TeamEntity();
-        team.setName("Wawa");
-
         GameEntity gameEntity = new GameEntity();
         gameEntity.setTeamHomeId(game.getTeamHomeId());
         gameEntity.setTeamAwayId(game.getTeamAwayId());
@@ -59,6 +56,10 @@ public class MappingService {
     }
 
     Team map(TeamEntity teamEntity) {
+//        List <Player> playerList = new ArrayList<>();
+//        for (int i = 0; i <teamEntity.getPlayerEntityList().size() ; i++) {
+//            playerList.add(map(teamEntity.getPlayerEntityList().get(i)));
+//        }
         Team team = new Team();
         team.setName(teamEntity.getName());
         team.setPlayerList(null);
@@ -91,54 +92,8 @@ public class MappingService {
         player.setTeam(map(playerEntity.getTeamEntity()));
         return player;
     }
+
+
+
+
 }
-/*
-    //support method
-    List<GameEntity> getListOfGame(Team team) {
-        List<GameEntity> listOfGameEntity = new ArrayList<>();
-        for (int i = 0; i < team().size(); i++) {
-            listOfGameEntity.add(map(team.getGame().get(i)));
-        }
-        return listOfGameEntity;
-    }
-
-    List<Game> getListOfGame(TeamEntity teamEntity) {
-        List<Game> listOfGame = new ArrayList<>();
-        for (int i = 0; i < teamEntity.getGameEntity().size(); i++) {
-            listOfGame.add(map(teamEntity.getGameEntity().get(i)));
-        }
-        return listOfGame;
-    }
-
-    List<Player> getListOfPlayers(TeamEntity teamEntity) {
-        List<Player> playerList = new ArrayList<>();
-        for (int i = 0; i < teamEntity.getPlayerEntityList().size(); i++) {
-            playerList.add(map(teamEntity.getPlayerEntityList().get(i)));
-        }
-        return playerList;
-    }
-
-    List<PlayerEntity> getListOfPlayers(Team team) {
-        List<PlayerEntity> playerEntityList = new ArrayList<>();
-        for (int i = 0; i < team.getPlayerList().size(); i++) {
-            playerEntityList.add(map(team.getPlayerList().get(i)));
-        }
-        return playerEntityList;
-    }
-
-    List<TeamEntity> getListOfTeam(Game game) {
-        List<TeamEntity> teamEntityList = new ArrayList<>();
-        for (int i = 0; i < game.getTeam().size(); i++) {
-            teamEntityList.add(map(game.getTeam().get(i)));
-        }
-        return teamEntityList;
-    }
-
-    List<Team> getListOfTeam(GameEntity gameEntity) {
-        List<Team> teamList = new ArrayList<>();
-        for (int i = 0; i < gameEntity.getTeamEntity().size(); i++) {
-            teamList.add(map(gameEntity.getTeamEntity().get(i)));
-        }
-        return teamList;
-    }*/
-
