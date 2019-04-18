@@ -9,6 +9,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -16,8 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.time.LocalDate;
 import java.util.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -31,10 +32,11 @@ public class GameControllerTest {
 
     private Long id;
 
+    private GameEntity gameEntity1 = new GameEntity();
+
     @Before
     public void init() {
 
-        GameEntity gameEntity1 = new GameEntity();
         gameEntity1.setTeamHomeId(1L);
         gameEntity1.setTeamAwayId(2L);
         gameEntity1.setTeamHomeName("Warsaw");
@@ -69,7 +71,7 @@ public class GameControllerTest {
         ResponseEntity<GameEntity[]> response = testRestTemplate.getForEntity(
                 "/game/gameByDate", GameEntity[].class
         );
-        List<GameEntity> list = repositoryGame.findByFutureGames();
+        List<GameEntity> list= repositoryGame.findByFutureGames();
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals(Long.valueOf(list.get(0).getTeamAwayScore()),Long.valueOf(5L));
@@ -84,6 +86,7 @@ public class GameControllerTest {
 
         List<GameEntity> game = repositoryGame.findByTeamHomeName("Warsaw");
         assertNotNull(id);
+        assertEquals("Warsaw",game.get(0).getTeamHomeName());
         assertEquals("Cracow",game.get(0).getTeamAwayName());
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
@@ -101,6 +104,35 @@ public class GameControllerTest {
         repositoryGame.findById(id);
         assertNotNull(id);
 
+    }
+
+    @Test
+    public void removeGameTest(){ //remove nie działa bo jest zła wersja JUNIT 4.12 --> 4.11 ale jak się zmienia na 4.11 to Spring na to nie pozwala i koło się zamyka (ten sam probem co na zajęciach), w POSTMANIE usuwa
+
+        Long gameId = gameEntity1.getGameId();
+        Map<String, String> params = new HashMap<>();
+        params.put("id", "1");
+        String url = "http://localhost:8080/game/removeGame/{id}";
+        testRestTemplate.delete(url,params);
+
+        //testRestTemplate.delete("/game/removeGame/{id}",id);
+        //repositoryGame.findById(id);
+        //assertNull(gameId);
+    }
+
+    @Test
+    public void editGameTest(){ //nie wiem czy Ok w postamanie działa
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("id", "1");
+
+        Long id = gameEntity1.getGameId();
+        String url = "http://localhost:8080/game/editGame/{id}";
+        gameEntity1.setTeamAwayName("Warsawwwa");
+
+        testRestTemplate.put(url,gameEntity1,params);
+        repositoryGame.findById(id);
+        assertEquals(gameEntity1.getTeamAwayName(),"Warsawwwa");
     }
 }
 
