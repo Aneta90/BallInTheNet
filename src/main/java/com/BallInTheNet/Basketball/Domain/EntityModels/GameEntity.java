@@ -22,7 +22,6 @@ import java.util.List;
 
         private String teamAwayName;
 
-
         @Column(name = "teamHomeScore"/*, nullable = false*/)
         private Integer teamHomeScore;
 
