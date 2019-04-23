@@ -9,15 +9,18 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static sun.audio.AudioPlayer.player;
+
 @Service
 public class TeamService {
 
     private final RepositoryTeam repositoryTeam;
-
+    private final MappingService mappingService;
 
     @Autowired
-    public TeamService(RepositoryTeam repositoryTeam) {
+    public TeamService(RepositoryTeam repositoryTeam, MappingService mappingService) {
         this.repositoryTeam = repositoryTeam;
+        this.mappingService = mappingService;
     }
 
     private TeamEntity map(Team team) {
@@ -89,5 +92,10 @@ public class TeamService {
             return map(newEntity);
         }
         return null;
+    }
+
+    public Boolean isTeamExist(Team team) {
+        TeamEntity teamEntity = mappingService.map(team);
+        return repositoryTeam.existsById(teamEntity.getTeamId());
     }
 }

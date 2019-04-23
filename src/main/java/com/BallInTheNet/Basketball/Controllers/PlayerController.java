@@ -30,7 +30,7 @@ public class PlayerController {
     public ResponseEntity<List<Player>> playersList() {
         List<Player> playersList = playerService.getListOfPlayer();
         if (playersList.isEmpty()) {
-            logger.error("Base is empty. Firstly add some players.");
+            logger.info("Base is empty. Firstly add some players.");
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
         logger.info("List of all players");
@@ -41,7 +41,7 @@ public class PlayerController {
     public ResponseEntity<List<Player>> playersWithGivenName(@PathVariable String name) {
         List<Player> playersList = playerService.playersWithGivenName(name);
         if (playersList.isEmpty()) {
-            logger.error("There is no player name {}", name);
+            logger.info("There is no player name {}", name);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         logger.info("List of players with name {}", name);
@@ -52,7 +52,7 @@ public class PlayerController {
     public ResponseEntity<List<Player>> findPlayersInTeam(@PathVariable String teamName) {
         List<Player> playersListInTeam = playerService.findAllPlayersInTeam(teamName);
         if (playersListInTeam.isEmpty()) {
-            logger.error("In team {}, there is no any players!", teamName);
+            logger.info("In team {}, there is no any players!", teamName);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         logger.info("List of players in team {}", teamName);
@@ -63,7 +63,7 @@ public class PlayerController {
     public ResponseEntity<List<Player>> playersOlderThen(@PathVariable int age) {
         List<Player> playersListOlderThen = playerService.findOlderThen(age);
         if (playersListOlderThen.isEmpty()) {
-            logger.error("There is not any player older then {}", age);
+            logger.info("There is not any player older then {}", age);
         }
         logger.info("List of players older then {}", age);
         return (ResponseEntity<List<Player>>) playersListOlderThen;
@@ -73,7 +73,7 @@ public class PlayerController {
     public ResponseEntity<List<Player>> playersYoungerThen(@PathVariable int age) {
         List<Player> playersListYoungerThen = playerService.findYoungerThen(age);
         if (playersListYoungerThen.isEmpty()) {
-            logger.error("There is not any player younger then {}", age);
+            logger.info("There is not any player younger then {}", age);
         }
         logger.info("List of players younger then {}", age);
         return (ResponseEntity<List<Player>>) playersListYoungerThen;
@@ -83,7 +83,7 @@ public class PlayerController {
     public ResponseEntity<?> addPlayer(@RequestBody Player player) {
         logger.info("Adding player : {}", player);
         if (playerService.isPlayerExist(player)) {
-            logger.error("There is this player in database. Player : {}", player);
+            logger.info("There is this player in database. Player : {}", player);
             return new ResponseEntity<>(String.valueOf(new CustomError("Unable to create Player. Player " +
                     player + " already exists.")), HttpStatus.CONFLICT);
         }
