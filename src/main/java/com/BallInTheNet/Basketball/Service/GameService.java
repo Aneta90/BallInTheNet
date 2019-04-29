@@ -26,8 +26,6 @@ public class GameService {
 
     public GameEntity map(Game game) {
 
-        TeamEntity team = new TeamEntity();
-
         GameEntity gameEntity = new GameEntity();
         gameEntity.setTeamHomeId(game.getTeamHomeId());
         gameEntity.setTeamAwayId(game.getTeamAwayId());

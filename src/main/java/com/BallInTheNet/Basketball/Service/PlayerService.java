@@ -45,8 +45,8 @@ public class PlayerService {
     }
 
     public List<Player> findAllPlayersInTeam(String teamName) {
-        List<PlayerEntity> playerEntityList =
-                repositoryPlayer.findAllByTeamEntity(mappingService.map(teamService.findByNameEquals(teamName)));
+        Long teamId = teamService.findByNameAndReturnID(teamName);
+        List<PlayerEntity> playerEntityList = repositoryPlayer.findAllByTeamEntity(mappingService.map(teamService.findByNameEquals(teamName)));
         List<Player> playerList = new ArrayList<>();
         for (PlayerEntity playerEntity : playerEntityList) {
             playerList.add(mappingService.map(playerEntity));

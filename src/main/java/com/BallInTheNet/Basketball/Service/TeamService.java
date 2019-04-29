@@ -61,6 +61,15 @@ public class TeamService {
 
         return map(teamEntityList.get(0));
     }
+    public Long findByNameAndReturnID(String teamName) {
+        List<TeamEntity> teamEntityList = repositoryTeam.findByName(teamName);
+        if (teamEntityList.size() > 1) {
+            System.out.println("Wrong implementation");// zabezpeiczneie przez posiadaniem 2 takich samymch teamow w bazie do skonczenia
+            return null;
+        }
+        Long teamId = teamEntityList.get(0).getTeamId();
+        return teamId;
+    }
 
     public List<Team> findByTotalScore(Long totalScore) {
         List<Team> teamList = new ArrayList<>();

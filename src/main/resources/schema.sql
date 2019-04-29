@@ -1,12 +1,12 @@
-/*CREATE TABLE players (
-    playerId INTEGER NOT NULL auto_increment,
-    firstName VARCHAR(20),
-    surName VARCHAR(20),
+CREATE TABLE players (
+    playerId BIGINT NOT NULL auto_increment,
+    firstName VARCHAR(255),
+    surName VARCHAR(255),
     age INTEGER,
     experience INTEGER,
     isInjured BOOLEAN,
     rating INTEGER,
-    teamId INTEGER,
+    teamId BIGINT,
     CONSTRAINT PK_Players PRIMARY KEY (playerId)
 );
 
@@ -20,25 +20,22 @@ CREATE TABLE teams (
 );
 
 CREATE TABLE games (
-    gameId INTEGER NOT NULL auto_increment,
+    gameId BIGINT NOT NULL auto_increment,
     teamHomeId INTEGER UNIQUE,
     teamAwayId INTEGER UNIQUE,
-    teamHomeName VARCHAR(16) UNIQUE,
-    teamAwayName VARCHAR(16) UNIQUE,
+    teamHomeName VARCHAR(255) UNIQUE,
+    teamAwayName VARCHAR(255) UNIQUE,
     teamHomeScore INTEGER,
     teamAwayScore INTEGER,
     isTeamHomeWin BOOLEAN,
     isTeamAwayWin BOOLEAN,
     date DATE,
-    CONSTRAINT PK_Games PRIMARY KEY (gameId),
-    FOREIGN KEY (teamHomeId) REFERENCES teams(teamId),
-    FOREIGN KEY (teamAwayId) REFERENCES teams(teamId)
+    CONSTRAINT PK_Games PRIMARY KEY (gameId)
 );
 
-CREATE TABLE games_teams (
-    gameId INTEGER NOT NULL REFERENCES games (gameId),
-    teamHomeId INTEGER NOT NULL REFERENCES teams (teamId),
-    teamAwayId INTEGER NOT NULL REFERENCES teams (teamId),
-    PRIMARY KEY (gameId)
-);
-*/
+# CREATE TABLE games_teams (
+#     gameId INTEGER NOT NULL REFERENCES games (gameId),
+#     teamHomeId INTEGER NOT NULL REFERENCES teams (teamId),
+#     teamAwayId INTEGER NOT NULL REFERENCES teams (teamId),
+#     PRIMARY KEY (gameId)
+# );

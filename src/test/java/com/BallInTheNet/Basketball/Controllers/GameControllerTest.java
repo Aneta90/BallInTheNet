@@ -1,4 +1,4 @@
-package com.BallInTheNet.Basketball.Controller;
+package com.BallInTheNet.Basketball.Controllers;
 
 import com.BallInTheNet.Basketball.Domain.EntityModels.GameEntity;
 import com.BallInTheNet.Basketball.Domain.Repository.RepositoryGame;

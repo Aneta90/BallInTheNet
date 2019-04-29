@@ -47,7 +47,6 @@ public class MappingService {
 
     //team mapping
     TeamEntity map(Team team) {
-
         TeamEntity teamEntity = new TeamEntity();
         teamEntity.setName(team.getName());
         teamEntity.setPlayerEntityList(null);
@@ -92,8 +91,6 @@ public class MappingService {
         player.setTeam(map(playerEntity.getTeamEntity()));
         return player;
     }
-
-
 
 
 }

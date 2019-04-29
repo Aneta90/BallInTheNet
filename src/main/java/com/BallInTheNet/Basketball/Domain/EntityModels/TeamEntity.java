@@ -1,4 +1,5 @@
 package com.BallInTheNet.Basketball.Domain.EntityModels;
+
 import com.BallInTheNet.Basketball.Models.Game;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -7,7 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-@Table(name = "Teams")
+@Table(name = "teams")
 @Entity
 public class TeamEntity implements Serializable {
 
@@ -15,13 +16,16 @@ public class TeamEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long teamId;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "PK_Teams")
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "teamEntity", cascade = CascadeType.ALL)
     private List<PlayerEntity> playerEntityList;
 
     //@Setter(AccessLevel.NONE)
+    @Column(name = "totalScore")
     private Long totalScore;
 
     public TeamEntity() {

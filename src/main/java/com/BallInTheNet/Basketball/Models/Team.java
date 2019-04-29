@@ -20,7 +20,6 @@ public class Team {
         this.totalScore = totalScore;
     }
 
-
     public String getName() {
         return name;
     }

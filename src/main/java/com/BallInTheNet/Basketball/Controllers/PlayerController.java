@@ -25,74 +25,79 @@ public class PlayerController {
     public PlayerController(PlayerService playerService) {
         this.playerService = playerService;
     }
-
+    //ok
     @GetMapping("/playersList")
-    public ResponseEntity<List<Player>> playersList() {
+    public ResponseEntity playersList() {
         List<Player> playersList = playerService.getListOfPlayer();
         if (playersList.isEmpty()) {
-            logger.info("Base is empty. Firstly add some players.");
+            logger.warn("Base is empty. Firstly add some players.");
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
         logger.info("List of all players");
-        return (ResponseEntity<List<Player>>) playersList;
+        return new ResponseEntity<>(playersList, HttpStatus.OK);
     }
-
-    @GetMapping("/playerByName/{name}")
-    public ResponseEntity<List<Player>> playersWithGivenName(@PathVariable String name) {
+    // ok
+    @GetMapping("/playerBySurName/{name}")
+    public ResponseEntity playersWithGivenName(@PathVariable String name) {
         List<Player> playersList = playerService.playersWithGivenName(name);
         if (playersList.isEmpty()) {
             logger.info("There is no player name {}", name);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        logger.info("List of players with name {}", name);
-        return (ResponseEntity<List<Player>>) playersList;
+        logger.warn("List of players with name {}", name);
+        return new ResponseEntity<>(playersList, HttpStatus.OK);
     }
 
+    //problem team =/= long id
     @GetMapping("/findPlayersInTeam/{teamName}")
-    public ResponseEntity<List<Player>> findPlayersInTeam(@PathVariable String teamName) {
+    public ResponseEntity findPlayersInTeam(@PathVariable String teamName) {
         List<Player> playersListInTeam = playerService.findAllPlayersInTeam(teamName);
         if (playersListInTeam.isEmpty()) {
-            logger.info("In team {}, there is no any players!", teamName);
+            logger.warn("In team {}, there is no any players!", teamName);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         logger.info("List of players in team {}", teamName);
-        return (ResponseEntity<List<Player>>) playersListInTeam;
+        return new ResponseEntity<>(playersListInTeam, HttpStatus.OK);
     }
 
+    //ok
     @GetMapping("/findOlderThen/{age}")
-    public ResponseEntity<List<Player>> playersOlderThen(@PathVariable int age) {
+    public ResponseEntity playersOlderThen(@PathVariable int age) {
         List<Player> playersListOlderThen = playerService.findOlderThen(age);
         if (playersListOlderThen.isEmpty()) {
-            logger.info("There is not any player older then {}", age);
+            logger.warn("There is not any player older then {}", age);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         logger.info("List of players older then {}", age);
-        return (ResponseEntity<List<Player>>) playersListOlderThen;
+        return new ResponseEntity<>(playersListOlderThen, HttpStatus.OK);
     }
 
+    //ok
     @GetMapping("findYoungerThen/{age}")
-    public ResponseEntity<List<Player>> playersYoungerThen(@PathVariable int age) {
+    public ResponseEntity playersYoungerThen(@PathVariable int age) {
         List<Player> playersListYoungerThen = playerService.findYoungerThen(age);
         if (playersListYoungerThen.isEmpty()) {
-            logger.info("There is not any player younger then {}", age);
+            logger.warn("There is not any player younger then {}", age);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         logger.info("List of players younger then {}", age);
-        return (ResponseEntity<List<Player>>) playersListYoungerThen;
+        return new ResponseEntity<>(playersListYoungerThen, HttpStatus.OK);
     }
-
+    //to test
     @PostMapping("/addPlayer")   // przeciazyc i zrobic tak samo get i post pod ta sama sciezka np. player?
     public ResponseEntity<?> addPlayer(@RequestBody Player player) {
         logger.info("Adding player : {}", player);
         if (playerService.doesPlayerExist(player)) {
-            logger.info("There is this player in database. Player : {}", player);
+            logger.warn("There is this player in database. Player : {}", player);
             return new ResponseEntity<>(String.valueOf(new CustomError("Unable to create Player. Player " +
                     player + " already exists.")), HttpStatus.CONFLICT);
         }
         Long createdPlayerId = playerService.savePlayer(player);
         return new ResponseEntity<>(createdPlayerId, HttpStatus.CREATED);
     }
-
+    //to test
     @PutMapping("/editPlayer/{id")
-    public ResponseEntity<Player> editPlayer(@RequestBody Player player, @PathVariable Long id) {
+    public ResponseEntity editPlayer(@RequestBody Player player, @PathVariable Long id) {
         logger.info("Edit player with id {}", id);
         Player player1 = playerService.editPlayer(player, id);
         if (player1 == null) {
@@ -101,7 +106,7 @@ public class PlayerController {
         }
         return new ResponseEntity<>(player1, HttpStatus.UPGRADE_REQUIRED);
     }
-
+    //ok
     @DeleteMapping("/removePlayer/{id}")
     public ResponseEntity<Boolean> removePlayer(@PathVariable Long id) {
         boolean isRemoved = playerService.removePlayer(id);
@@ -113,7 +118,7 @@ public class PlayerController {
         return new ResponseEntity<>(isRemoved, HttpStatus.OK);
 
     }
-
+    //ok
     @GetMapping("/injuredPlayers")
     public ResponseEntity<List<Player>> injuredPlayersList() {
         List<Player> injuredPlayersList = playerService.listOfInjuredPlayers();
@@ -122,7 +127,7 @@ public class PlayerController {
             return new ResponseEntity<>(injuredPlayersList, HttpStatus.OK);
         }
         logger.info("List of injured players");
-        return (ResponseEntity<List<Player>>) injuredPlayersList;
+        return new ResponseEntity<>(injuredPlayersList, HttpStatus.OK);
     }
 }
 

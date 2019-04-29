@@ -24,73 +24,73 @@ public class GameController {
     public GameController(GameService gameService /*,RepositoryGame repositoryGame*/) {
         this.gameService = gameService;
     }
-
+    //ok
     @GetMapping("/gameList")
-    public ResponseEntity<List<Game>> gameList(){
+    public ResponseEntity gameList() {
         List<Game> gameList = gameService.getGames();
         if (gameList.isEmpty()) {
             logger.info("Base is empty. Firstly add some games.");
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
         logger.info("List of all games");
-        return (ResponseEntity<List<Game>>) gameList;
+        return new ResponseEntity<>(gameList, HttpStatus.OK);
     }
-
+    //ok
     @GetMapping("/gameByTeamHome/{teamHomeName}")
-    public ResponseEntity<List<Game>> gameListByTeamHome(@PathVariable String teamHomeName){
+    public ResponseEntity gameListByTeamHome(@PathVariable String teamHomeName) {
         List<Game> gameList = gameService.findByHomeTeam(teamHomeName);
         if (gameList.isEmpty()) {
             logger.info("Base is empty. Firstly add some games.");
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
-        logger.info("List of games with name{}",teamHomeName);
-        return (ResponseEntity<List<Game>>) gameList;
+        logger.info("List of games with name{}", teamHomeName);
+        return new ResponseEntity(gameList, HttpStatus.OK);
     }
-
+    //ok
     @GetMapping("/gameByTeamAway/{teamAwayName}")
-    public ResponseEntity<List<Game>> gameListByTeamAway(@PathVariable String teamAwayName){
+    public ResponseEntity gameListByTeamAway(@PathVariable String teamAwayName) {
         List<Game> gameList = gameService.findByHomeAway(teamAwayName);
-        if(gameList.isEmpty()){
+        if (gameList.isEmpty()) {
             logger.info("Base is empty. Firstly add some games");
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        logger.info("List of games with name{}",teamAwayName);
-         return (ResponseEntity<List<Game>>) gameList;
+        logger.info("List of games with name{}", teamAwayName);
+        return new ResponseEntity(gameList, HttpStatus.OK);
     }
-
+    //ok
     @GetMapping("/gameById/{game_id}")
-    public ResponseEntity findGameByGameId(@PathVariable Long game_id){
+    public ResponseEntity findGameByGameId(@PathVariable Long game_id) {
         Game game = gameService.findGameById(game_id);
-        if(game == null){
+        if (game == null) {
             logger.warn("There is no game with given id");
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(game,HttpStatus.OK);
+        return new ResponseEntity<>(game, HttpStatus.OK);
     }
-
+    //ok
     @GetMapping("/gameByDate")
-    public ResponseEntity<List<Game>> findFutureGames(){
+    public ResponseEntity findFutureGames() {
         List<Game> gameList = gameService.findByFutureGames();
-        if(gameList.isEmpty()){
+        if (gameList.isEmpty()) {
             logger.info("Base is empty. There are no future games.");
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         logger.info("List of games in the future");
-        return (ResponseEntity<List<Game>>) gameList;
+        return new ResponseEntity(gameList, HttpStatus.OK);
     }
 
     @PostMapping("/addNewGame")
-    public ResponseEntity<?> addNewGame(@RequestBody Game game){
-        logger.info("Adding game : {}",game);
-        if(gameService.doesGameExist(game)){
+    public ResponseEntity<?> addNewGame(@RequestBody Game game) {
+        logger.info("Adding game : {}", game);
+        if (gameService.doesGameExist(game)) {
             logger.info("There is this game in database. Game : {}", game);
             return new ResponseEntity<>(String.valueOf(new CustomError("Unable to create Game. Game " +
                     game + " already exists.")), HttpStatus.CONFLICT);
         }
         Long createdGameId = gameService.addGame(game);
         return new ResponseEntity<>(createdGameId, HttpStatus.CREATED);
-        }
-
+    }
+    //ok
     @DeleteMapping("/removeGame/{id}")
     public ResponseEntity<Boolean> remove(@PathVariable Long id) {
         boolean isRemoved = gameService.removeGame(id);
@@ -101,29 +101,18 @@ public class GameController {
         logger.info("Game with id {}, is deleted", id);
         return new ResponseEntity<>(isRemoved, HttpStatus.OK);
     }
-
+    //ok
     @PutMapping("/editGame/{id}")
     public ResponseEntity<Game> editGame(@RequestBody Game game, @PathVariable Long id) {
         logger.info("Edit game with id {}", id);
-        Game game1 = gameService.editGame(id,game);
+        Game game1 = gameService.editGame(id, game);
         if (game1 == null) {
             logger.error("Something went wrong...");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(game, HttpStatus.UPGRADE_REQUIRED);
-        }
     }
+}
 
-  /*  @RequestMapping(value="/{game_id}/team",method = RequestMethod.GET) //próba nie działa
-    public ResponseEntity<Collection<Team>> getTeamGame(@PathVariable long game_id) { //accesing team from a given game
-        Game game = gameService.findGameById(game_id);
-        //GameEntity game = repositoryGame.findOne(game_id);
-
-        if (game != null) {
-            return new ResponseEntity<>(game.getTeam(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
-    }*/
 
 

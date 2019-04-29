@@ -23,20 +23,20 @@ public class TeamController {
     public TeamController(TeamService teamService) {
         this.teamService = teamService;
     }
-
+    //ok
     @GetMapping("/teamList")
-    public ResponseEntity<List<Team>> teamList() {
+    public ResponseEntity teamList() {
         List<Team> listOfTeams = teamService.getTeams();
         if (listOfTeams.isEmpty()) {
             logger.info("There is not any teams in DataBase");
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         logger.info("List of all teams");
-        return (ResponseEntity<List<Team>>) listOfTeams;
+        return new ResponseEntity<> (listOfTeams, HttpStatus.OK);
     }
-
+    //ok
     @GetMapping("/teamByName/{teamName}")
-    public ResponseEntity<List<Team>> teamListByTeamName(@PathVariable String teamName) {
+    public ResponseEntity teamListByTeamName(@PathVariable String teamName) {
         List<Team> teamList = teamService.findByName(teamName);
         if (teamList.isEmpty()) {
             logger.info("There is not any team name {}", teamName);
@@ -44,8 +44,8 @@ public class TeamController {
         }
         return new ResponseEntity<>(teamList, HttpStatus.OK);
     }
-
-    @GetMapping("/teamByTotalScore/{totalScore}")
+    //ok
+    @GetMapping("/teamByTotalScoreBiggerThen/{totalScore}")
     public ResponseEntity<List<Team>> teamListByTotalScore(@PathVariable Long totalScore) {
         List<Team> listTeam = teamService.findByTotalScore(totalScore);
         if (listTeam.isEmpty()) {
@@ -54,7 +54,7 @@ public class TeamController {
         }
         return new ResponseEntity<>(listTeam, HttpStatus.OK);
     }
-
+    //ok
     @GetMapping("/teamByNameEquals/{teamName}")
     public ResponseEntity<Team> findByNameEquals(@PathVariable String teamName) {
         Team team = teamService.findByNameEquals(teamName);
@@ -76,7 +76,7 @@ public class TeamController {
         Long id = teamService.addTeam(team);
         return new ResponseEntity<Long>(id, HttpStatus.OK);
     }
-
+    //ok
     @DeleteMapping("/removeTeam/{id}")
     public ResponseEntity<Boolean> remove(@PathVariable Long id) {
         logger.info("Removing team with id : {}", id);
@@ -100,16 +100,5 @@ public class TeamController {
         logger.info("Team with id : {}, was edited.");
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(team);
     }
-
-   /* @GetMapping("/{name}/game") //nie dziala
-    public ResponseEntity<Collection<Game>> getGameTeam(@PathVariable String name) { //accesing game from a given team
-        Team team = teamService.findByNameEquals(name);
-
-        if (team != null) {
-            return new ResponseEntity<>(team.get, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
-    }*/
 
 }
