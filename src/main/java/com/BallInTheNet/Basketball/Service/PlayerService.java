@@ -104,7 +104,7 @@ public class PlayerService {
     }
 
     // do przetestowania
-    public Boolean isPlayerExist(Player player) {
+    public Boolean doesPlayerExist(Player player) {
         PlayerEntity playerEntity = mappingService.map(player);
         return repositoryPlayer.existsById(playerEntity.getPlayerId());
     }

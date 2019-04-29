@@ -82,7 +82,7 @@ public class PlayerController {
     @PostMapping("/addPlayer")   // przeciazyc i zrobic tak samo get i post pod ta sama sciezka np. player?
     public ResponseEntity<?> addPlayer(@RequestBody Player player) {
         logger.info("Adding player : {}", player);
-        if (playerService.isPlayerExist(player)) {
+        if (playerService.doesPlayerExist(player)) {
             logger.info("There is this player in database. Player : {}", player);
             return new ResponseEntity<>(String.valueOf(new CustomError("Unable to create Player. Player " +
                     player + " already exists.")), HttpStatus.CONFLICT);
@@ -96,7 +96,7 @@ public class PlayerController {
         logger.info("Edit player with id {}", id);
         Player player1 = playerService.editPlayer(player, id);
         if (player1 == null) {
-            logger.error("Sth go wrong...");
+            logger.error("Something went wrong...");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(player1, HttpStatus.UPGRADE_REQUIRED);

@@ -1,6 +1,5 @@
 package com.BallInTheNet.Basketball.Service;
 
-import com.BallInTheNet.Basketball.Domain.EntityModels.GameEntity;
 import com.BallInTheNet.Basketball.Domain.EntityModels.PlayerEntity;
 import com.BallInTheNet.Basketball.Domain.EntityModels.TeamEntity;
 import com.BallInTheNet.Basketball.Domain.Repository.RepositoryGame;

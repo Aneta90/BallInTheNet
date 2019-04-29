@@ -1,11 +1,13 @@
 package com.BallInTheNet.Basketball.Service;
 
 import com.BallInTheNet.Basketball.Domain.EntityModels.GameEntity;
+import com.BallInTheNet.Basketball.Domain.EntityModels.PlayerEntity;
 import com.BallInTheNet.Basketball.Domain.EntityModels.TeamEntity;
 import com.BallInTheNet.Basketball.Domain.Repository.RepositoryGame;
 import com.BallInTheNet.Basketball.Models.Game;
-import com.BallInTheNet.Basketball.Models.Team;
+import com.BallInTheNet.Basketball.Models.Player;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -99,6 +101,11 @@ public class GameService {
         GameEntity gameEntity;
         gameEntity= repositoryGame.findGameByGameId(game_id);
         return map(gameEntity);
+    }
+
+    public Boolean doesGameExist(Game game) {
+        GameEntity gameEntity = mappingService.map(game);
+        return repositoryGame.existsById(gameEntity.getGameId());
     }
 
     public List<Game> findByFutureGames(){
