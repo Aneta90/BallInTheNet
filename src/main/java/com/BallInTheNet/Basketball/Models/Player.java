@@ -14,13 +14,13 @@ public class Player {
     public Player() {
     }
 
-    public Player(String firstName, String surName, Integer age, Integer experience,
-                  Boolean isInjured, Team team) {
+    public Player(String firstName, String surName, Integer age, Integer experience, Boolean isInjured, Integer rating, Team team) {
         this.firstName = firstName;
         this.surName = surName;
         this.age = age;
         this.experience = experience;
         this.isInjured = isInjured;
+        this.rating = rating;
         this.team = team;
     }
 

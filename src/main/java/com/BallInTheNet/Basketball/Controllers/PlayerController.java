@@ -48,7 +48,7 @@ public class PlayerController {
         return new ResponseEntity<>(playersList, HttpStatus.OK);
     }
 
-    //problem team =/= long id
+    //chyba działa
     @GetMapping("/findPlayersInTeam/{teamName}")
     public ResponseEntity findPlayersInTeam(@PathVariable String teamName) {
         List<Player> playersListInTeam = playerService.findAllPlayersInTeam(teamName);

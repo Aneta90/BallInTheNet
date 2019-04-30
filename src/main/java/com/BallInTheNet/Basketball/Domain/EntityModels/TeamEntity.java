@@ -37,6 +37,11 @@ public class TeamEntity implements Serializable {
         this.totalScore = totalScore;
     }
 
+    public TeamEntity(String name, Long totalScore) {
+        this.name = name;
+        this.totalScore = totalScore;
+    }
+
     public Long getTeamId() {
         return teamId;
     }

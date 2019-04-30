@@ -31,7 +31,6 @@ public class GameControllerTest {
     private RepositoryGame repositoryGame;
 
     private Long id;
-
     private GameEntity gameEntity1 = new GameEntity();
 
     @Before
