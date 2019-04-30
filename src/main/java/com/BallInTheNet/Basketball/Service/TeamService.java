@@ -67,8 +67,7 @@ public class TeamService {
             System.out.println("Wrong implementation");// zabezpeiczneie przez posiadaniem 2 takich samymch teamow w bazie do skonczenia
             return null;
         }
-        Long teamId = teamEntityList.get(0).getTeamId();
-        return teamId;
+        return teamEntityList.get(0).getTeamId();
     }
 
     public List<Team> findByTotalScore(Long totalScore) {

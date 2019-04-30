@@ -53,12 +53,13 @@ public class PlayerController {
     public ResponseEntity findPlayersInTeam(@PathVariable String teamName) {
         List<Player> playersListInTeam = playerService.findAllPlayersInTeam(teamName);
         if (playersListInTeam.isEmpty()) {
-            logger.warn("In team {}, there is no any players!", teamName);
+            logger.warn("In team {}, there are not any players!", teamName);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         logger.info("List of players in team {}", teamName);
         return new ResponseEntity<>(playersListInTeam, HttpStatus.OK);
     }
+
 
     //ok
     @GetMapping("/findOlderThen/{age}")

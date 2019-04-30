@@ -12,10 +12,9 @@ import java.util.List;
 
 @Repository
 public interface RepositoryPlayer extends JpaRepository<PlayerEntity, Long> {
-// @Query("Select p from PlayerEntity p JOIN TeamEntity t ON t.teamId = ?1 AND p.teamEntity.getTeamId = t.teamId")
-//    List<PlayerEntity> findAllPlayersByTeamId (Long id);
 
-    List<PlayerEntity> findAllByTeamEntity(TeamEntity teamEntity);
+    @Query("Select p from PlayerEntity p where p.teamEntity.teamId = ?1")
+    List<PlayerEntity> findAllPlayersByTeamId (Long id);
 
     List<PlayerEntity> findAllBySurName(String surname);
 
