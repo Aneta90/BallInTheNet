@@ -117,13 +117,3 @@ public class Game {
     }
 }
 
-/*{
-        "teamHome": "War",
-        "teamAway": "Rze",
-        "team": null,
-        "teamHomeScore": 1,
-        "teamAwayScore": 2,
-        "date": "2019-04-11",
-        "teamHomeWin": null,
-        "teamAwayWin": null
-    } */

@@ -23,7 +23,6 @@ public class PlayerEntity implements Serializable {
     private Integer age;
 
     @Column(name = "experience")
-    // default value = 0; ??
     private Integer experience;
 
     @Column(name = "isInjured")

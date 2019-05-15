@@ -2,7 +2,6 @@ package com.BallInTheNet.Basketball.Repository;
 
 import com.BallInTheNet.Basketball.Domain.EntityModels.GameEntity;
 import com.BallInTheNet.Basketball.Domain.Repository.RepositoryGame;
-import com.BallInTheNet.Basketball.Models.Game;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

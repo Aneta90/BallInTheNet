@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static sun.audio.AudioPlayer.player;
-
 @Service
 public class TeamService {
 
@@ -55,7 +53,7 @@ public class TeamService {
     public Team findByNameEquals(String teamName) {
         List<TeamEntity> teamEntityList = repositoryTeam.findByName(teamName);
         if (teamEntityList.size() > 1) {
-            System.out.println("Wrong implementation");// zabezpeiczneie przez posiadaniem 2 takich samymch teamow w bazie do skonczenia
+            System.out.println("Wrong implementation");
             return null;
         }
 
@@ -94,7 +92,7 @@ public class TeamService {
         if (repositoryTeam.existsById(id)) {
             TeamEntity newEntity = repositoryTeam.findById(id).get();
             newEntity.setName(team.getName());
-            newEntity.setPlayerEntityList(null);//TO DO mapowanie listy
+            newEntity.setPlayerEntityList(null);
             newEntity.setTotalScore(team.getTotalScore());
             repositoryTeam.save(newEntity);
             return map(newEntity);

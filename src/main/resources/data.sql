@@ -12,10 +12,6 @@ VALUES
 ('Seb','Lub',30,10,false ,90,1),
 ('Ana','Wro',35,20,true,99,2);
 
-
-
-
-
 INSERT INTO GAMES
 (teamHomeId,teamAwayId,teamHomeName,teamAwayName,teamHomeScore,
 teamAwayScore,isTeamHomeWin,isTeamAwayWin,date)

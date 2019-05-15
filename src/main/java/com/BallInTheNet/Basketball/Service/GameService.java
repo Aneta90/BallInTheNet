@@ -1,13 +1,9 @@
 package com.BallInTheNet.Basketball.Service;
 
 import com.BallInTheNet.Basketball.Domain.EntityModels.GameEntity;
-import com.BallInTheNet.Basketball.Domain.EntityModels.PlayerEntity;
-import com.BallInTheNet.Basketball.Domain.EntityModels.TeamEntity;
 import com.BallInTheNet.Basketball.Domain.Repository.RepositoryGame;
 import com.BallInTheNet.Basketball.Models.Game;
-import com.BallInTheNet.Basketball.Models.Player;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -85,14 +81,12 @@ public class GameService {
         List<Game> gameList = new ArrayList<>();
         repositoryGame.findByTeamHomeName(teamHomeName).forEach(element-> gameList.add(map(element)));
         return gameList;
-        //return repositoryGame.findByTeamHome(teamHome).stream().map(this::map).collect(Collectors.toList());
     }
 
     public List<Game> findByHomeAway(String teamAwayName){
         List<Game> gameList = new ArrayList<>();
         repositoryGame.findByTeamAwayName(teamAwayName).forEach(element-> gameList.add(map(element)));
         return gameList;
-        //return repositoryGame.findByTeamAway(teamAway).stream().map(this::map).collect(Collectors.toList());
     }
 
     public Game findGameById(Long game_id){

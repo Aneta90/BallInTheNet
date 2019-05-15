@@ -8,13 +8,10 @@ import com.BallInTheNet.Basketball.Models.Player;
 import com.BallInTheNet.Basketball.Models.Team;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Service
 public class MappingService {
-    //game mapping
 
     GameEntity map(Game game) {
         GameEntity gameEntity = new GameEntity();
@@ -45,7 +42,6 @@ public class MappingService {
         return game;
     }
 
-    //team mapping
     TeamEntity map(Team team) {
         TeamEntity teamEntity = new TeamEntity();
         teamEntity.setName(team.getName());
@@ -55,10 +51,6 @@ public class MappingService {
     }
 
     Team map(TeamEntity teamEntity) {
-//        List <Player> playerList = new ArrayList<>();
-//        for (int i = 0; i <teamEntity.getPlayerEntityList().size() ; i++) {
-//            playerList.add(map(teamEntity.getPlayerEntityList().get(i)));
-//        }
         Team team = new Team();
         team.setName(teamEntity.getName());
         team.setPlayerList(null);
@@ -66,7 +58,6 @@ public class MappingService {
         return team;
     }
 
-    //players mapping
     PlayerEntity map(Player player) {
         PlayerEntity playerEntity = new PlayerEntity();
         playerEntity.setFirstName(player.getFirstName());

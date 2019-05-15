@@ -1,6 +1,5 @@
 package com.BallInTheNet.Basketball.Domain.EntityModels;
 
-import com.BallInTheNet.Basketball.Models.Game;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -24,7 +23,6 @@ public class TeamEntity implements Serializable {
     @OneToMany(mappedBy = "teamEntity", cascade = CascadeType.ALL)
     private List<PlayerEntity> playerEntityList;
 
-    //@Setter(AccessLevel.NONE)
     @Column(name = "totalScore")
     private Long totalScore;
 
@@ -85,22 +83,3 @@ public class TeamEntity implements Serializable {
                 '}';
     }
 }
-
-/*
-  {
-        "teamHome": "War",
-        "teamAway": "Rze",
-        "team": [{
-        "name":"War",
-        "totalScore":10
-    }, {
-        "name":"War",
-        "totalScore":20
-    }],
-        "teamHomeScore": 1,
-        "teamAwayScore": 2,
-        "date": "2019-04-11",
-        "teamHomeWin": null,
-        "teamAwayWin": null
-    }
- */

@@ -104,13 +104,11 @@ public class PlayerService {
         return playerList;
     }
 
-    // do przetestowania
     public Boolean doesPlayerExist(Player player) {
         PlayerEntity playerEntity = mappingService.map(player);
         return repositoryPlayer.existsById(playerEntity.getPlayerId());
     }
 
-    // do poprawy mapowania
     public Player editPlayer(Player player, Long id) {
         if (repositoryPlayer.existsById(id)) {
             PlayerEntity playerEntity = repositoryPlayer.getOne(id);

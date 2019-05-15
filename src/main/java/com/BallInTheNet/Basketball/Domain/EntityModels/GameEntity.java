@@ -1,11 +1,8 @@
 package com.BallInTheNet.Basketball.Domain.EntityModels;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
 @Table(name = "Games")
 @Entity
@@ -14,9 +11,9 @@ public class GameEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long gameId;
 
-    private Long teamHomeId; //brak polaczenia z Teamem
+    private Long teamHomeId;
 
-    private Long teamAwayId; // brak polaczeni z Teamem -> jak polaczyc dwa atrybuty z GameEntity(teamHomeId,teamAwayId) z jednym teamId z TeamEntity? Oto jest pytanie !
+    private Long teamAwayId;
 
     private String teamHomeName;
 
@@ -130,14 +127,6 @@ public class GameEntity implements Serializable {
     public void setTeamAwayWin(Boolean teamAwayWin) {
         isTeamAwayWin = teamAwayWin;
     }
-
-        /*public List<TeamEntity> getTeamEntity() {
-            return teamEntity;
-        }
-
-        public void setTeamEntity(List<TeamEntity> teamEntity) {
-            this.teamEntity = teamEntity;
-        }*/
 
     public LocalDate getDate() {
         return date;

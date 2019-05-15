@@ -1,7 +1,5 @@
 package com.BallInTheNet.Basketball.Models;
 
-import com.BallInTheNet.Basketball.Domain.EntityModels.GameEntity;
-
 import java.util.List;
 
 
