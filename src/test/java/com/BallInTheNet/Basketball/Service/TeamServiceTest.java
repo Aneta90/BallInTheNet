@@ -3,17 +3,14 @@ package com.BallInTheNet.Basketball.Service;
 import com.BallInTheNet.Basketball.Domain.EntityModels.PlayerEntity;
 import com.BallInTheNet.Basketball.Domain.EntityModels.TeamEntity;
 import com.BallInTheNet.Basketball.Domain.Repository.RepositoryTeam;
-import com.BallInTheNet.Basketball.Models.Game;
 import com.BallInTheNet.Basketball.Models.Team;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,7 +49,6 @@ public class TeamServiceTest {
         teamEntityList.add(teamEntity);
         repositoryTeam.save(teamEntity);
         when(repositoryTeam.findByName(any())).thenReturn(teamEntityList);
-       // when(repositoryTeam.findByNameEquals(any())).thenReturn(teamEntity);
         when(repositoryTeam.findByTotalScore(any())).thenReturn(teamEntityList);
     }
 
@@ -91,16 +87,4 @@ public class TeamServiceTest {
         assertEquals(Long.valueOf(100L), teamList.get(0).getTotalScore());
     }
 
-    @Test
-    public void editTeamTest() {
-//        Team team = new Team();
-//        team.setName("Test");
-//        team.setTotalScore(200L);
-//        team.setPlayerList(null);
-//        when(mappingService.map(teamEntityList.get(0))).thenReturn(team);
-//        //when(repositoryTeam.existsById(teamEntityList.get(0).getTeamId())).thenReturn(true);
-//        //when(repositoryTeam.findAllById(teamEntityList.get(0).getTeamId()).get()).thenReturn(team)
-//        Team team1 = teamService.editTeam(teamEntityList.get(0).getTeamId(), team);
-//        assertEquals(team.getName(), team1.getName());
-    }
 }
