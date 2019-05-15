@@ -64,7 +64,7 @@ public class TeamService {
     public Long findByNameAndReturnID(String teamName) {
         List<TeamEntity> teamEntityList = repositoryTeam.findByName(teamName);
         if (teamEntityList.size() > 1) {
-            System.out.println("Wrong implementation");// zabezpeiczneie przez posiadaniem 2 takich samymch teamow w bazie do skonczenia
+            System.out.println("Wrong implementation");
             return null;
         }
         return teamEntityList.get(0).getTeamId();

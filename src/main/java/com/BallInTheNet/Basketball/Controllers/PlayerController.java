@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Players")
+@RequestMapping("/players")
 public class PlayerController {
 
     private static final Logger logger = LoggerFactory.getLogger(PlayerController.class);
@@ -25,7 +25,7 @@ public class PlayerController {
     public PlayerController(PlayerService playerService) {
         this.playerService = playerService;
     }
-    //ok
+
     @GetMapping("/playersList")
     public ResponseEntity playersList() {
         List<Player> playersList = playerService.getListOfPlayer();
@@ -36,7 +36,7 @@ public class PlayerController {
         logger.info("List of all players");
         return new ResponseEntity<>(playersList, HttpStatus.OK);
     }
-    // ok
+
     @GetMapping("/playerBySurName/{name}")
     public ResponseEntity playersWithGivenName(@PathVariable String name) {
         List<Player> playersList = playerService.playersWithGivenName(name);
@@ -48,7 +48,7 @@ public class PlayerController {
         return new ResponseEntity<>(playersList, HttpStatus.OK);
     }
 
-    //chyba działa
+
     @GetMapping("/findPlayersInTeam/{teamName}")
     public ResponseEntity findPlayersInTeam(@PathVariable String teamName) {
         List<Player> playersListInTeam = playerService.findAllPlayersInTeam(teamName);

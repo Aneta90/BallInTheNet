@@ -2,15 +2,12 @@ package com.BallInTheNet.Basketball.Controllers;
 
 import com.BallInTheNet.Basketball.Domain.EntityModels.GameEntity;
 import com.BallInTheNet.Basketball.Domain.Repository.RepositoryGame;
-import com.BallInTheNet.Basketball.Models.Game;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -47,21 +44,6 @@ public class GameControllerTest {
         gameEntity1.setDate(LocalDate.of(2020, 4, 3));
         repositoryGame.save(gameEntity1);
         id = gameEntity1.getGameId();
-    }
-
-    @Test
-    public void addGameTest() {
-        Game game = new Game(1L, 2L, "Warsaw", "Cracow", 5, 2, true, false, LocalDate.of(2020, 4, 3));
-
-        ResponseEntity<Long> response = testRestTemplate.postForEntity(
-                "/game/addNewGame",
-                game,
-                Long.class
-        );
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertNotNull(response.getBody());
-        assertEquals(Long.valueOf(2L), Long.valueOf(game.getTeamAwayScore()));
-
     }
 
     @Test
@@ -106,23 +88,9 @@ public class GameControllerTest {
     }
 
     @Test
-    public void removeGameTest(){ //remove nie działa bo jest zła wersja JUNIT 4.12 --> 4.11 ale jak się zmienia na 4.11 to Spring na to nie pozwala i koło się zamyka (ten sam probem co na zajęciach), w POSTMANIE usuwa
+    public void editGameTest(){
 
-        Long gameId = gameEntity1.getGameId();
         Map<String, String> params = new HashMap<>();
-        params.put("id", "1");
-        String url = "http://localhost:8080/game/removeGame/{id}";
-        testRestTemplate.delete(url,params);
-
-        //testRestTemplate.delete("/game/removeGame/{id}",id);
-        //repositoryGame.findById(id);
-        //assertNull(gameId);
-    }
-
-    @Test
-    public void editGameTest(){ //nie wiem czy Ok w postamanie działa
-
-        Map<String, String> params = new HashMap<String, String>();
         params.put("id", "1");
 
         Long id = gameEntity1.getGameId();
