@@ -24,7 +24,7 @@ public class GameController {
     public GameController(GameService gameService /*,RepositoryGame repositoryGame*/) {
         this.gameService = gameService;
     }
-    //ok
+
     @GetMapping("/gameList")
     public ResponseEntity gameList() {
         List<Game> gameList = gameService.getGames();
@@ -35,7 +35,7 @@ public class GameController {
         logger.info("List of all games");
         return new ResponseEntity<>(gameList, HttpStatus.OK);
     }
-    //ok
+
     @GetMapping("/gameByTeamHome/{teamHomeName}")
     public ResponseEntity gameListByTeamHome(@PathVariable String teamHomeName) {
         List<Game> gameList = gameService.findByHomeTeam(teamHomeName);
@@ -46,7 +46,7 @@ public class GameController {
         logger.info("List of games with name{}", teamHomeName);
         return new ResponseEntity(gameList, HttpStatus.OK);
     }
-    //ok
+
     @GetMapping("/gameByTeamAway/{teamAwayName}")
     public ResponseEntity gameListByTeamAway(@PathVariable String teamAwayName) {
         List<Game> gameList = gameService.findByHomeAway(teamAwayName);
@@ -57,7 +57,7 @@ public class GameController {
         logger.info("List of games with name{}", teamAwayName);
         return new ResponseEntity(gameList, HttpStatus.OK);
     }
-    //ok
+
     @GetMapping("/gameById/{game_id}")
     public ResponseEntity findGameByGameId(@PathVariable Long game_id) {
         Game game = gameService.findGameById(game_id);
@@ -67,7 +67,7 @@ public class GameController {
         }
         return new ResponseEntity<>(game, HttpStatus.OK);
     }
-    //ok
+
     @GetMapping("/gameByDate")
     public ResponseEntity findFutureGames() {
         List<Game> gameList = gameService.findByFutureGames();
@@ -90,7 +90,7 @@ public class GameController {
         Long createdGameId = gameService.addGame(game);
         return new ResponseEntity<>(createdGameId, HttpStatus.CREATED);
     }
-    //ok
+
     @DeleteMapping("/removeGame/{id}")
     public ResponseEntity<Boolean> remove(@PathVariable Long id) {
         boolean isRemoved = gameService.removeGame(id);

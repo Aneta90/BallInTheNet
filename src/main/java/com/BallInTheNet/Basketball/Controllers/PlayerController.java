@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -60,8 +59,6 @@ public class PlayerController {
         return new ResponseEntity<>(playersListInTeam, HttpStatus.OK);
     }
 
-
-    //ok
     @GetMapping("/findOlderThen/{age}")
     public ResponseEntity playersOlderThen(@PathVariable int age) {
         List<Player> playersListOlderThen = playerService.findOlderThen(age);
@@ -73,7 +70,6 @@ public class PlayerController {
         return new ResponseEntity<>(playersListOlderThen, HttpStatus.OK);
     }
 
-    //ok
     @GetMapping("findYoungerThen/{age}")
     public ResponseEntity playersYoungerThen(@PathVariable int age) {
         List<Player> playersListYoungerThen = playerService.findYoungerThen(age);
@@ -84,8 +80,8 @@ public class PlayerController {
         logger.info("List of players younger then {}", age);
         return new ResponseEntity<>(playersListYoungerThen, HttpStatus.OK);
     }
-    //to test
-    @PostMapping("/addPlayer")   // przeciazyc i zrobic tak samo get i post pod ta sama sciezka np. player?
+
+    @PostMapping("/addPlayer")
     public ResponseEntity<?> addPlayer(@RequestBody Player player) {
         logger.info("Adding player : {}", player);
         if (playerService.doesPlayerExist(player)) {
@@ -96,7 +92,7 @@ public class PlayerController {
         Long createdPlayerId = playerService.savePlayer(player);
         return new ResponseEntity<>(createdPlayerId, HttpStatus.CREATED);
     }
-    //to test
+
     @PutMapping("/editPlayer/{id")
     public ResponseEntity editPlayer(@RequestBody Player player, @PathVariable Long id) {
         logger.info("Edit player with id {}", id);
@@ -107,19 +103,19 @@ public class PlayerController {
         }
         return new ResponseEntity<>(player1, HttpStatus.UPGRADE_REQUIRED);
     }
-    //ok
+
     @DeleteMapping("/removePlayer/{id}")
     public ResponseEntity<Boolean> removePlayer(@PathVariable Long id) {
         boolean isRemoved = playerService.removePlayer(id);
         if (!isRemoved) {
             logger.error("Player with Id {}, wasn't removed", id);
-            return new ResponseEntity<Boolean>(false, HttpStatus.CONFLICT);
+            return new ResponseEntity<>(false, HttpStatus.CONFLICT);
         }
         logger.info("Player with id {}, is deleted", id);
         return new ResponseEntity<>(isRemoved, HttpStatus.OK);
 
     }
-    //ok
+
     @GetMapping("/injuredPlayers")
     public ResponseEntity<List<Player>> injuredPlayersList() {
         List<Player> injuredPlayersList = playerService.listOfInjuredPlayers();

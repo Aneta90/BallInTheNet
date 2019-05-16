@@ -19,16 +19,16 @@ public class GameEntity implements Serializable {
 
     private String teamAwayName;
 
-    @Column(name = "teamHomeScore"/*, nullable = false*/)
+    @Column(name = "teamHomeScore")
     private Integer teamHomeScore;
 
-    @Column(name = "teamAwayScore"/*, nullable = false*/)
+    @Column(name = "teamAwayScore")
     private Integer teamAwayScore;
 
-    @Column(name = "isTeamHomeWin"/*, nullable = false*/)
+    @Column(name = "isTeamHomeWin")
     private Boolean isTeamHomeWin;
 
-    @Column(name = "isTeamAwayWin"/*, nullable = false*/)
+    @Column(name = "isTeamAwayWin")
     private Boolean isTeamAwayWin;
 
     @Column
@@ -142,7 +142,6 @@ public class GameEntity implements Serializable {
                 "gameId=" + gameId +
                 ", teamHomeName='" + teamHomeName + '\'' +
                 ", teamAwayName='" + teamAwayName + '\'' +
-                // ", teamEntity=" + teamEntity +
                 ", teamHomeScore=" + teamHomeScore +
                 ", teamAwayScore=" + teamAwayScore +
                 ", isTeamHomeWin=" + isTeamHomeWin +

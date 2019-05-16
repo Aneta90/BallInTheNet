@@ -23,7 +23,7 @@ public class TeamController {
     public TeamController(TeamService teamService) {
         this.teamService = teamService;
     }
-    //ok
+
     @GetMapping("/teamList")
     public ResponseEntity teamList() {
         List<Team> listOfTeams = teamService.getTeams();
@@ -34,7 +34,7 @@ public class TeamController {
         logger.info("List of all teams");
         return new ResponseEntity<> (listOfTeams, HttpStatus.OK);
     }
-    //ok
+
     @GetMapping("/teamByName/{teamName}")
     public ResponseEntity teamListByTeamName(@PathVariable String teamName) {
         List<Team> teamList = teamService.findByName(teamName);
@@ -44,7 +44,7 @@ public class TeamController {
         }
         return new ResponseEntity<>(teamList, HttpStatus.OK);
     }
-    //ok
+
     @GetMapping("/teamByTotalScoreBiggerThen/{totalScore}")
     public ResponseEntity<List<Team>> teamListByTotalScore(@PathVariable Long totalScore) {
         List<Team> listTeam = teamService.findByTotalScore(totalScore);
@@ -54,7 +54,7 @@ public class TeamController {
         }
         return new ResponseEntity<>(listTeam, HttpStatus.OK);
     }
-    //ok
+
     @GetMapping("/teamByNameEquals/{teamName}")
     public ResponseEntity<Team> findByNameEquals(@PathVariable String teamName) {
         Team team = teamService.findByNameEquals(teamName);
@@ -74,9 +74,9 @@ public class TeamController {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
         Long id = teamService.addTeam(team);
-        return new ResponseEntity<Long>(id, HttpStatus.OK);
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
-    //ok
+
     @DeleteMapping("/removeTeam/{id}")
     public ResponseEntity<Boolean> remove(@PathVariable Long id) {
         logger.info("Removing team with id : {}", id);
