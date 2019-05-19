@@ -101,7 +101,7 @@ public class GameController {
         logger.info("Game with id {}, is deleted", id);
         return new ResponseEntity<>(isRemoved, HttpStatus.OK);
     }
-    //ok
+
     @PutMapping("/editGame/{id}")
     public ResponseEntity<Game> editGame(@RequestBody Game game, @PathVariable Long id) {
         logger.info("Edit game with id {}", id);
