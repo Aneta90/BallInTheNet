@@ -29,7 +29,7 @@ public class GameController {
     public ResponseEntity gameList() {
         List<Game> gameList = gameService.getGames();
         if (gameList.isEmpty()) {
-            logger.info("Base is empty. Firstly add some games.");
+            logger.warn("Base is empty. Firstly add some games.");
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
         logger.info("List of all games");
@@ -40,7 +40,7 @@ public class GameController {
     public ResponseEntity gameListByTeamHome(@PathVariable String teamHomeName) {
         List<Game> gameList = gameService.findByHomeTeam(teamHomeName);
         if (gameList.isEmpty()) {
-            logger.info("Base is empty. Firstly add some games.");
+            logger.warn("Base is empty. Firstly add some games.");
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
         logger.info("List of games with name{}", teamHomeName);
@@ -51,7 +51,7 @@ public class GameController {
     public ResponseEntity gameListByTeamAway(@PathVariable String teamAwayName) {
         List<Game> gameList = gameService.findByHomeAway(teamAwayName);
         if (gameList.isEmpty()) {
-            logger.info("Base is empty. Firstly add some games");
+            logger.warn("Base is empty. Firstly add some games");
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         logger.info("List of games with name{}", teamAwayName);
@@ -72,7 +72,7 @@ public class GameController {
     public ResponseEntity findFutureGames() {
         List<Game> gameList = gameService.findByFutureGames();
         if (gameList.isEmpty()) {
-            logger.info("Base is empty. There are no future games.");
+            logger.warn("Base is empty. There are no future games.");
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         logger.info("List of games in the future");
@@ -83,7 +83,7 @@ public class GameController {
     public ResponseEntity<?> addNewGame(@RequestBody Game game) {
         logger.info("Adding game : {}", game);
         if (gameService.doesGameExist(game)) {
-            logger.info("There is this game in database. Game : {}", game);
+            logger.warn("There is this game in database. Game : {}", game);
             return new ResponseEntity<>(String.valueOf(new CustomError("Unable to create Game. Game " +
                     game + " already exists.")), HttpStatus.CONFLICT);
         }
@@ -95,8 +95,8 @@ public class GameController {
     public ResponseEntity<Boolean> remove(@PathVariable Long id) {
         boolean isRemoved = gameService.removeGame(id);
         if (!isRemoved) {
-            logger.error("Game with Id {}, wasn't removed", id);
-            return new ResponseEntity<Boolean>(false, HttpStatus.CONFLICT);
+            logger.warn("Game with Id {}, wasn't removed", id);
+            return new ResponseEntity<>(false, HttpStatus.CONFLICT);
         }
         logger.info("Game with id {}, is deleted", id);
         return new ResponseEntity<>(isRemoved, HttpStatus.OK);

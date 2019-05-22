@@ -40,10 +40,10 @@ public class PlayerController {
     public ResponseEntity playersWithGivenName(@PathVariable String name) {
         List<Player> playersList = playerService.playersWithGivenName(name);
         if (playersList.isEmpty()) {
-            logger.info("There is no player name {}", name);
+            logger.warn("There is no player name {}", name);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        logger.warn("List of players with name {}", name);
+        logger.info("List of players with name {}", name);
         return new ResponseEntity<>(playersList, HttpStatus.OK);
     }
 
@@ -120,7 +120,7 @@ public class PlayerController {
     public ResponseEntity<List<Player>> injuredPlayersList() {
         List<Player> injuredPlayersList = playerService.listOfInjuredPlayers();
         if (injuredPlayersList.isEmpty()) {
-            logger.info("There isn't any injured player now.");
+            logger.warn("There isn't any injured player now.");
             return new ResponseEntity<>(injuredPlayersList, HttpStatus.OK);
         }
         logger.info("List of injured players");

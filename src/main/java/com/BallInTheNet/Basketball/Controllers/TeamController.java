@@ -28,7 +28,7 @@ public class TeamController {
     public ResponseEntity teamList() {
         List<Team> listOfTeams = teamService.getTeams();
         if (listOfTeams.isEmpty()) {
-            logger.info("There is not any teams in DataBase");
+            logger.warn("There is not any teams in DataBase");
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         logger.info("List of all teams");
@@ -39,7 +39,7 @@ public class TeamController {
     public ResponseEntity teamListByTeamName(@PathVariable String teamName) {
         List<Team> teamList = teamService.findByName(teamName);
         if (teamList.isEmpty()) {
-            logger.info("There is not any team name {}", teamName);
+            logger.warn("There is not any team name {}", teamName);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(teamList, HttpStatus.OK);
@@ -49,7 +49,7 @@ public class TeamController {
     public ResponseEntity<List<Team>> teamListByTotalScore(@PathVariable Long totalScore) {
         List<Team> listTeam = teamService.findByTotalScore(totalScore);
         if (listTeam.isEmpty()) {
-            logger.info("there isn't any team with totalScore {}", totalScore);
+            logger.warn("there isn't any team with totalScore {}", totalScore);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(listTeam, HttpStatus.OK);
@@ -59,7 +59,7 @@ public class TeamController {
     public ResponseEntity<Team> findByNameEquals(@PathVariable String teamName) {
         Team team = teamService.findByNameEquals(teamName);
         if (team == null) {
-            logger.info("There isn't any team name {}", teamName);
+            logger.warn("There isn't any team name {}", teamName);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         logger.info("Finding team with name {}", teamName);
@@ -70,7 +70,7 @@ public class TeamController {
     public ResponseEntity<?> addNewTeam(@RequestBody Team team) {
         logger.info("Added team : {}", team);
         if (teamService.isTeamExist(team)) {
-            logger.info("There is this team in database, team : {} ", team);
+            logger.warn("There is this team in database, team : {} ", team);
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
         Long id = teamService.addTeam(team);
@@ -82,7 +82,7 @@ public class TeamController {
         logger.info("Removing team with id : {}", id);
         Boolean isDeleted = teamService.removeTeam(id);
         if (!isDeleted) {
-            logger.info("Team with id {} wasn't removed", id);
+            logger.warn("Team with id {} wasn't removed", id);
             return new ResponseEntity<>(false, HttpStatus.CONFLICT);
         }
         logger.info("Team with id {} is removed", id);
@@ -94,7 +94,7 @@ public class TeamController {
         team = teamService.editTeam(id, team);
         logger.info("Editing team with id : {}", id);
         if (team == null) {
-            logger.info("Given team = null");
+            logger.error("Given team = null");
             return ResponseEntity.badRequest().body("Bad request");
         }
         logger.info("Team with id : {}, was edited.");
