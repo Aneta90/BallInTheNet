@@ -13,11 +13,11 @@
         </File>
     </Appenders>
     <Loggers>
-        <Logger name="com.mkyong" level="debug" additivity="false">
+        <Logger name="com.BallInTheNet.Basketball" level="debug" additivity="false">
             <AppenderRef ref="LogToFile"/>
             <AppenderRef ref="LogToConsole"/>
         </Logger>
-        <Logger name="org.springframework.boot" level="error" additivity="false">
+        <Logger name="org.springframework.boot" level="info" additivity="false">
             <AppenderRef ref="LogToConsole"/>
         </Logger>
         <Root level="error">
